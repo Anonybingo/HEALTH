@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSPlanning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+  <div class="custom-cursor" id="customCursor"></div>
+  <section class="hero-wrapper">
+
+    <!-- Loader screen -->
+    <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-bar-track">
+        <div class="loader-bar-fill" id="loaderFill"></div>
+      </div>
+      <span class="loader-label">LOADING</span>
+    </div>
+  </div>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html"><div class="navbar-logo">MS PLANNING</div></a>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="pharmacy/pharmacy.html" class="nav-link">Pharmacy</a></li>
+        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        <li class="nav-item">
+          <a href="auth/auth.html" class="nav-link" id="navAuthLink">Sign In</a>
+
+          <ul class="auth-dropdown" id="authDropdown" style="display: none;">
+            <li><a href="profile/profile.html">Profile</a></li>
+            <li><a href="cart/cart.html">Cart</a></li>
+            <li><a href="history/history.html">Order History</a></li>
+            <li><a href="chat/chat.html">Live Chat</a></li>
+            <li><a href="settings/settings.html">Settings</a></li>
+            <li><button data-logout class="logout-btn">Logout</button></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Main scene -->
+  <main class="scene" id="scene">
+    
+    <!-- Background panel -->
+    <div class="bg-panels">
+      <div class="panel panel--center" id="panelCenter">
+        <!-- <img src="media/image1.png" alt="Background" class="panel-img" id="imgCenter" /> -->
+         <video src="media/hero-wrapper.mp4" width="100%" height="100%" autoplay muted loop class="panel-img" id="imgCenter"></video>
+        <div class="panel-vignette panel-vignette--center"></div>
+      </div>
+    </div>
+
+    <!-- Center hairline divider -->
+    <div class="center-line" id="centerLine"></div>
+
+    <!-- Global dark vignette -->
+    <div class="vignette-global"></div>
+    
+    <div class="scanlines"></div>
+
+    <!-- Particle canvas -->
+    <canvas class="particle-canvas" id="particleCanvas"></canvas>
+
+    <!-- Mouse light -->
+    <div class="mouse-light" id="mouseLight"></div>
+
+    <!-- Hero content -->
+    <div class="hero" id="hero">
+
+      <!-- WELCOME text with image-reveal clip effect -->
+      <div class="welcome-clip-wrap">
+        <h1 class="welcome-text" id="welcomeText">MS PLANNING</h1>
+      </div>
+
+      <!-- Subtitle row -->
+      <div class="subtitle-row" id="subtitleRow">
+        <span class="subtitle-line"></span>
+        <p class="subtitle-text">YOUR HEALTH IS OUR PRIORITY</p>
+        <span class="subtitle-line"></span>
+      </div>
+
+    </div>
+
+    <!-- Corner brackets -->
+    <div class="bracket bracket--tl" id="bTL"></div>
+    <div class="bracket bracket--tr" id="bTR"></div>
+    <div class="bracket bracket--bl" id="bBL"></div>
+    <div class="bracket bracket--br" id="bBR"></div>
+    
+    <!-- Bottom badge -->
+    <div class="bottom-badge" id="bottomBadge">
+      <div class="badge-dot"></div>
+      <span>MSPlanning</span>
+      <div class="badge-dot"></div>
+    </div>
+
+    </main>
+
+  </section>
+
+  <section id="pharmacy-portal" class="portal-section reveal">
+    <div class="portal-content">
+      <h2 class="section-title">SECURE PHARMACY PORTAL</h2>
+      <div class="title-line" style="margin: 0 auto 30px auto;"></div>
+      <p>ACCESS OUR COMPREHENSIVE MEDICAL INVENTORY AND PRESCRIPTION SYSTEM. SECURE, FAST, AND DISCREET DELIVERY DIRECTLY TO YOUR LOCATION.</p>
+      <a href="pharmacy/pharmacy.html" class="magnetic-btn portal-btn" style="display: inline-block; text-decoration: none; margin-top: 30px;">ENTER PHARMACY</a>
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <div class="about-container reveal">
+      <div class="about-text">
+        <h2 class="section-title">ABOUT US</h2>
+        <div class="title-line"></div>
+        <p>we believe healthcare should be proactive, not reactive. our state-of-the-art facility combines cutting-edge diagnostics with compassionate care to ensure your peak performance.</p>
+        <p>founded on the principle of excellence, we are your partners in long-term wellness and longevity.</p>
+        <button class="magnetic-btn">DISCOVER OUR TEAM</button>
+      </div>
+      <div class="about-visual">
+        <div class="abstract-shape"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="contact-container reveal">
+      <h2 class="section-title">REACH OUT</h2>
+      <p class="contact-sub">ready to prioritize your health? drop us a message.</p>
+      
+      <form class="contact-form" onsubmit="event.preventDefault();">
+        <div class="input-group">
+          <input type="text" id="name" required>
+          <label for="name">YOUR NAME</label>
+        </div>
+        <div class="input-group">
+          <input type="email" id="email" required>
+          <label for="email">YOUR EMAIL</label>
+        </div>
+        <div class="input-group">
+          <textarea id="message" rows="4" required></textarea>
+          <label for="message">YOUR MESSAGE</label>
+        </div>
+        <button type="submit" class="magnetic-btn submit-btn">SEND TRANSMISSION</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer-section">
+    <canvas id="leafCanvas" class="leaf-canvas"></canvas>
+    
+    <div class="footer-container reveal">
+      <div class="footer-grid">
+        
+        <div class="footer-col branding">
+          <div class="navbar-logo">HEALTH CENTER</div>
+          <p class="footer-desc">ELEVATING LONGEVITY AND PEAK PERFORMANCE THROUGH ADVANCED MEDICAL SCIENCE AND KINETIC THERAPIES.</p>
+        </div>
+        
+        <div class="footer-col links">
+          <h4>NAVIGATION</h4>
+          <ul>
+            <li><a href="#home" class="nav-link">HOME</a></li>
+            <li><a href="#services" class="nav-link">SERVICES</a></li>
+            <li><a href="#about" class="nav-link">ABOUT</a></li>
+            <li><a href="#contact" class="nav-link">CONTACT</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col contact-info">
+          <h4>CONNECT</h4>
+          <p>TRANSMISSION: INFO@HEALTHCENTER.COM</p>
+          <p>CORE SYSTEM: +1 (555) 019-2834</p>
+        </div>
+        
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 HEALTH CENTER. ALL RIGHTS RESERVED.</p>
+        <div class="bottom-badge">
+          <div class="badge-dot"></div>
+          <span>MSPlanning</span>
+          <div class="badge-dot"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script/index.js"></script>
+  <script type="module">
+    import { initNavAuth } from "./firebase/nav-auth.js";
+    initNavAuth("");
+  </script>
+</body>
+</html>

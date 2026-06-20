@@ -1,0 +1,993 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:   #050b14;
+  --offblk:  #0a1322;
+  --white:   #f4f9fc;
+  --silver:  #8fa7be;
+  --dim:     rgba(0, 210, 255, 0.05);
+  --accent:  #00d2ff;
+  --main: #005CB9; /* #00569B , #003087*/
+  --accent-rgb: 0, 210, 255;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--offblk);
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  cursor: none;
+}
+
+/* ensure links don't show the default pointer either */
+a, button, .service-item {
+  cursor: none;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  pointer-events: none; /* ensures it doesn't block your clicks */
+  z-index: 9999999; /* stays above absolutely everything */
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+  mix-blend-mode: difference; /* makes it visible on both dark and light backgrounds */
+}
+
+/* class added via javascript when hovering over links */
+.custom-cursor.hovering {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: transparent;
+}
+
+/* ── Navigation Bar ──────────────────────────────────────── */
+.navbar {
+  position: fixed; /* changed back to fixed so it tracks the viewport */
+  top: 20px; 
+  left: 50%;
+  transform: translateX(-50%); /* keeps it centered horizontally */
+  width: 90%;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  z-index: 99999; 
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+  border-radius: 40px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out; /* creates the smooth sliding animation */
+}
+
+.navbar:hover {
+  background: rgba(0, 210, 255, 0.05); /* ADDS A GENTLE DYNAMIC CYAN-BLUE WATER SHINE */
+  border-color: rgba(0, 208, 255, 0.3);
+}
+
+.navbar--hidden {
+  transform: translate(-50%, -150%); /* combines the horizontal center with an upward push off-screen */
+}
+
+.nav-link, .navbar-logo {
+  display: inline-block; /* allows transforms to apply perfectly */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  max-width: 100%;
+}
+
+.navbar-logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--white) !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+.nav-item a {
+  color: var(--white) !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-item a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--offblk);
+  transition: width 0.3s ease;
+}
+
+.nav-item a:hover {
+  color: var(--offblk);
+}
+
+.nav-item a:hover::after {
+  width: 100%;
+}
+
+/* DROPDOWN CONTAINER */
+.auth-dropdown-container {
+  position: relative;
+}
+
+/* THE DROPDOWN MENU ITSELF */
+.auth-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  
+  /* THE GLASS EFFECT MAGIC */
+  background: rgba(255, 255, 255, 0.15); /* SEMI-TRANSPARENT WHITE */
+  backdrop-filter: blur(12px); /* BLURS WHATEVER IS BEHIND THE MENU */
+  -webkit-backdrop-filter: blur(12px); /* FOR SAFARI BROWSER SUPPORT */
+  border: 1px solid rgba(255, 255, 255, 0.4); /* LIGHT FROSTED EDGES */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15); /* SOFT DROP SHADOW */
+  
+  border-radius: 12px; /* SLIGHTLY ROUNDER CORNERS LOOK BETTER ON GLASS */
+  list-style: none;
+  padding: 8px 0;
+  margin: 15px 0 0 0; /* ADDS A LITTLE GAP SO IT FLOATS BELOW NAVBAR */
+  min-width: 180px;
+  z-index: 1000;
+}
+
+/* DROPDOWN LINKS AND BUTTONS */
+.auth-dropdown li a, 
+.auth-dropdown li button {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #fff; /* IF YOUR BACKGROUND IS VERY DARK, CHANGE THIS TO #FFF */
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s ease; /* SMOOTH HOVER TRANSITION */
+}
+
+/* HOVER EFFECT FOR MENU ITEMS */
+.auth-dropdown li a:hover, 
+.auth-dropdown li button:hover {
+  background: rgba(255, 255, 255, 0.25); /* GETS SLIGHTLY MORE SOLID ON HOVER */
+  -webkit-text-stroke: 1.5px black;
+}
+
+/* Adjust hero-wrapper for navbar */
+.hero-wrapper {
+  /* margin-top: 60px; */
+  position: relative;
+}
+
+/* ── Loader ──────────────────────────────────────────────── */
+.loader {
+  position: fixed; inset: 0; z-index: 999999 !important;
+  background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+  opacity: 1; visibility: visible; pointer-events: auto;
+}
+.loader.out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loader-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+.loader-bar-track {
+  width: 160px; height: 1px;
+  background: rgba(255,255,255,0.12);
+  overflow: hidden; position: relative;
+}
+.loader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, transparent, var(--white));
+  transition: width 0.6s var(--ease-out-expo);
+}
+
+.loader-label {
+  font-size: 9px; letter-spacing: 0.45em;
+  color: rgba(255,255,255,0.3);
+  font-weight: 300;
+}
+
+/* ── Hero Wrapper ────────────────────────────────────────── */
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+}
+
+/* ── Scene ───────────────────────────────────────────────── */
+.scene {
+  position: relative; width: 100%; height: 100vh; overflow: hidden;
+}
+
+/* ── Background Panels ───────────────────────────────────── */
+.bg-panels {
+  position: absolute; inset: 0;
+  display: flex;
+}
+
+.panel {
+  flex: 1; overflow: hidden;
+  position: relative; will-change: transform;
+}
+
+/* Start visible */
+.panel--center { transform: scale(1); opacity: 1; }
+
+/* Slide into place */
+.panel--center.in { 
+  transform: scale(1); 
+  opacity: 1; 
+  transition: transform 1.4s var(--ease-out-expo), opacity 1.4s ease;
+}
+
+.panel-img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  filter: brightness(0.45) contrast(1.15) grayscale(0.25);
+  transform: scale(1.08);
+  transition: filter 1.2s ease, transform 8s ease;
+  will-change: transform;
+}
+
+.panel:hover .panel-img {
+  filter: brightness(0.6) contrast(1.2) grayscale(0.1);
+}
+
+/* Panel-specific vignetttes */
+.panel-vignette { position: absolute; inset: 0; pointer-events: none; }
+
+.panel-vignette--center {
+  background: radial-gradient(ellipse at center,
+    transparent 0%,
+    rgba(0,0,0,0.5) 100%
+  );
+}
+
+/* ── Center Hairline ─────────────────────────────────────── */
+.center-line {
+  position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 1px; height: 100%; z-index: 10;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255,255,255,0.35) 30%,
+    rgba(255,255,255,0.35) 70%,
+    transparent
+  );
+  transition: height 0.9s var(--ease-out-expo);
+}
+.center-line.in { height: 100%; }
+
+/* ── Global Vignette ─────────────────────────────────────── */
+.vignette-global {
+  position: absolute; inset: 0; z-index: 11; pointer-events: none;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%,
+    transparent 20%, rgba(0,0,0,0.65) 100%);
+}
+
+/* ── Particle Canvas ─────────────────────────────────────── */
+.particle-canvas {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  width: 100%;
+  height: 50%;
+  z-index: 12;
+  pointer-events: none;
+  opacity: 0; transition: opacity 1.2s ease;
+}
+.particle-canvas.in { opacity: 1; }
+
+/* ── Mouse Light ─────────────────────────────────────────── */
+.mouse-light {
+  position: fixed;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  pointer-events: none; z-index: 13;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+    rgba(255,255,255,0.05) 0%,
+    transparent 70%
+  );
+  transition: left 0.12s ease, top 0.12s ease;
+}
+
+/* ── Hero Content ────────────────────────────────────────── */
+.hero {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: clamp(12px, 2vh, 22px);
+  z-index: 20;
+}
+
+/* ── WELCOME Text (image-through-text clip) ──────────────── */
+.welcome-clip-wrap {
+  overflow: hidden; /* enables slide-up reveal */
+  line-height: 1;
+}
+
+.welcome-text {
+  display: block;
+  font-family: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
+  font-size: clamp(70px, 14.5vw, 220px);
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  line-height: 0.88;
+  text-align: center;
+
+  /* ── Image-through-text effect ── */
+  /*  Single image centered background */
+  width: 100vw;
+  color: var(--white);
+  text-shadow: 0 0 20px rgba(255,255,255,0.3);
+  
+  filter: brightness(1.55) contrast(1.05)
+          drop-shadow(0 0 60px rgba(255,255,255,0.18));
+
+  /* Visible by default */
+  transform: translateY(0);
+  opacity: 1;
+  transition:
+    transform 1.3s var(--ease-out-expo),
+    opacity   0.8s ease;
+}
+.welcome-text.in {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ── Subtitle ────────────────────────────────────────────── */
+.subtitle-row {
+  display: flex; align-items: center; gap: 18px;
+  opacity: 1; transform: translateY(0);
+  transition: opacity 0.9s ease, transform 0.9s var(--ease-out-expo);
+}
+.subtitle-row.in { opacity: 1; transform: translateY(0); }
+
+.subtitle-line {
+  display: block;
+  width: 36px; height: 1px;
+  background: var(--silver); opacity: 0.45;
+}
+
+.subtitle-text {
+  font-size: clamp(9px, 1.1vw, 13px);
+  font-weight: 300;
+  letter-spacing: 0.38em;
+  color: var(--silver);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Corner Brackets ─────────────────────────────────────── */
+.bracket {
+  position: absolute;
+  width: 22px; height: 22px;
+  z-index: 25;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+.bracket.in { opacity: 1; }
+
+/* L-shape via pseudo-elements */
+.bracket::before,
+.bracket::after {
+  content: '';
+  position: absolute;
+  background: rgba(220,220,220,0.4);
+}
+/* Horizontal arm */
+.bracket::before { height: 1px; width: 22px; }
+/* Vertical arm */
+.bracket::after  { width: 1px;  height: 22px; }
+
+/* Positions */
+.bracket--tl { top: 24px;    left: 24px; }
+.bracket--tr { top: 24px;    right: 24px; }
+.bracket--bl { bottom: 24px; left: 24px; }
+.bracket--br { bottom: 24px; right: 24px; }
+
+/* Align arms for each corner */
+.bracket--tl::before { top: 0; left: 0; }
+.bracket--tl::after  { top: 0; left: 0; }
+
+.bracket--tr::before { top: 0; right: 0; left: auto; }
+.bracket--tr::after  { top: 0; right: 0; left: auto; }
+
+.bracket--bl::before { bottom: 0; top: auto; left: 0; }
+.bracket--bl::after  { bottom: 0; top: auto; left: 0; }
+
+.bracket--br::before { bottom: 0; top: auto; right: 0; left: auto; }
+.bracket--br::after  { bottom: 0; top: auto; right: 0; left: auto; }
+
+/* ── Bottom Badge ────────────────────────────────────────── */
+.bottom-badge {
+  position: absolute;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(0);
+  display: flex; align-items: center; gap: 10px;
+  opacity: 1; z-index: 25;
+  transition: opacity 0.8s ease, transform 0.8s var(--ease-out-expo);
+}
+.bottom-badge.in {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.bottom-badge span {
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  color: rgba(255,255,255,0.3);
+  font-weight: 300;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.badge-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  animation: dotPulse 2.2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50%       { opacity: 0.6;  transform: scale(1.4); }
+}
+
+/* ── Hover & Interaction ─────────────────────────────────── */
+.panel--left:hover  .panel-img { transform: scale(1.02); }
+.panel--right:hover .panel-img { transform: scale(1.02); }
+
+/* ── Services Section ───────────────────────────────────── */
+.services {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 20px;
+  background: linear-gradient(to top, var(--main), var(--offblk));
+  width: 100%;
+  overflow: hidden;
+  min-height: 100vh;
+  perspective: 1000px;
+}
+
+.service-item {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: var(--offblk);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden; /* keeps the shine layer contained inside the card borders */
+  transform-style: preserve-3d;
+  will-change: transform;
+  /* change your existing transition to only affect borders, as JS handles transform */
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.service-item:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: radial-gradient(
+    circle 120px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.08),
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.service-item:hover .shine {
+  opacity: 1;
+}
+
+/* ── Pharmacy Portal CTA Banner ──────────────────────────── */
+.portal-section {
+  width: 100%;
+  padding: 120px 20px;
+  background: linear-gradient(to bottom, var(--offblk), var(--black));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.portal-content {
+  max-width: 800px;
+  padding: 50px;
+  background: rgba(0, 210, 255, 0.02);
+  border: 1px solid rgba(0, 210, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0, 210, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.portal-content p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* section:nth-child(1){
+  color: #e0ffff;
+  }
+section:nth-child(2){
+  color: #42455a;
+  background: var(--offblk);
+} 
+section:nth-child(3){
+  color: #e0ffff;
+}
+section:nth-child(4){
+  color: #42455a;
+  background: var(--offblk);
+} */
+section .container{
+  margin: 100px;
+}
+
+.reveal{
+  position: relative;
+  transform: translateY(80px); /* slightly reduced distance for a cleaner slide */
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
+}
+
+.reveal.active{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.services .service-item:nth-child(1).reveal { transition-delay: 0s; }
+.services .service-item:nth-child(2).reveal { transition-delay: 0.15s; }
+.services .service-item:nth-child(3).reveal { transition-delay: 0.3s; }
+
+/* ── about section ───────────────────────────────────────── */
+.about-section {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to top, var(--main), var(--black));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-container {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  z-index: 2;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 6vw, 80px);
+  color: var(--white);
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+
+.title-line {
+  width: 60px;
+  height: 2px;
+  background: var(--silver);
+  margin-bottom: 30px;
+  opacity: 0.5;
+}
+
+.about-text p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.magnetic-btn {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 15px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 30px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  cursor: none;
+}
+
+.magnetic-btn:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.about-visual {
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.abstract-shape {
+  width: 300px;
+  height: 300px;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  background: linear-gradient(45deg, rgba(255, 255, 255), rgb(50, 100, 255)) !important;
+  border: 1px solid rgb(255, 255, 255) !important;
+  box-shadow: 0 0 40px rgba(150, 0, 255, 0.05);
+  animation: morph 8s ease-in-out infinite;
+  backdrop-filter: blur(5px);
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+  50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+}
+
+/* ── contact section ─────────────────────────────────────── */
+.contact-section {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to top, var(--offblk), var(--main));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.contact-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.contact-sub {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.input-group {
+  position: relative;
+  text-align: left;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 0;
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+
+.input-group textarea {
+  resize: none;
+}
+
+.input-group label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* floating label magic */
+.input-group input:focus,
+.input-group textarea:focus {
+  border-bottom-color: var(--white);
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label,
+.input-group textarea:focus ~ label,
+.input-group textarea:valid ~ label {
+  top: -20px;
+  font-size: 9px;
+  color: var(--white);
+}
+
+.submit-btn {
+  align-self: center;
+  margin-top: 10px;
+}
+
+/* ── SCANLINES & SCREEN GLITCH EFFECT ────────────────────── */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 11; /* SITS RIGHT ABOVE THE VIGNETTE BUT BELOW THE PARTICLES AND TEXT */
+  pointer-events: none; /* ENSURES IT DOES NOT BLOCK MOUSE CLICKS OR HOVERS */
+  
+  /* CREATES THE INVISIBLE TO BLACK REPEATING STRIPES */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.2)
+  );
+  
+  /* SETS THE EXACT THICKNESS OF THE SCANLINES (4 PIXELS TOTAL) */
+  background-size: 100% 4px;
+  opacity: 0.6;
+  
+  /* RUNS BOTH THE SMOOTH SCROLL AND THE JITTER GLITCH SIMULTANEOUSLY */
+  animation: scanline-scroll 10s linear infinite, scanline-jitter 3s ease-in-out infinite;
+}
+
+/* SLOWLY ROLLS THE LINES DOWN THE SCREEN CONTINUOUSLY */
+@keyframes scanline-scroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}
+
+/* CREATES A RANDOM, SPLIT-SECOND SIGNAL TWITCH EFFECT */
+@keyframes scanline-jitter {
+  0%, 93%, 97%, 100% { 
+    opacity: 0.6; 
+    transform: translateY(0); 
+  }
+  94% { 
+    opacity: 0.8; 
+    transform: translateY(2px); 
+  }
+  96% { 
+    opacity: 0.3; 
+    transform: translateY(-2px); 
+  }
+  98% { 
+    opacity: 0.9; 
+    transform: translateY(1px); 
+  }
+}
+
+/* ── FOOTER SECTION ──────────────────────────────────────── */
+.footer-section {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(to top, var(--main), var(--offblk));
+  /* border-top: 1px solid rgba(255, 255, 255, 0.05); */
+  border-top: none;
+  padding: 80px 20px 40px 20px;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+/* background canvas element */
+.leaf-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* ensures no click obstruction */
+  z-index: 1;
+  opacity: 0.5; /* blends seamlessly without overpowering text */
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.footer-col h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.footer-desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.8;
+  max-width: 320px;
+  margin-top: 15px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: 11px;
+  transition: color 0.3s ease;
+}
+
+.footer-col p {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-bottom p {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.1em;
+}
+
+
+/* responsive adjustments */
+@media (max-width: 768px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .title-line {
+    margin: 0 auto 30px auto;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .navbar-container {
+    padding: 12px 20px;
+  }
+
+  .navbar-logo {
+    font-size: 16px;
+  }
+
+  .nav-menu {
+    gap: 20px;
+  }
+
+  .nav-item a {
+    font-size: 12px;
+  }
+
+  .hero-wrapper {
+    margin-top: 50px;
+  }
+
+  .services {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .service-item {
+    width: 100%;
+    max-width: 200px;
+  }
+  .bg-panels { flex-direction: column; }
+  .panel--left  { transform: translateY(-100%); }
+  .panel--right { transform: translateY(100%); }
+  .panel--left.in  { transform: translateY(0); }
+  .panel--right.in { transform: translateY(0); }
+
+  .panel-vignette--left  {
+    background: linear-gradient(
+      to bottom, rgba(0,0,0,0.7) 0%, transparent 100%
+    );
+  }
+  .panel-vignette--right {
+    background: linear-gradient(
+      to top, rgba(0,0,0,0.7) 0%, transparent 100%
+    );
+  }
+  .center-line { display: none; }
+  .subtitle-text { letter-spacing: 0.22em; }
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .panel--left, .panel--right,
+  .welcome-text, .subtitle-row, .bottom-badge {
+    transform: none !important; opacity: 1 !important;
+  }
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Control | MSPlanning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style/style.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="../chat/chat-widget.css" />
+</head>
+<body>
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">HEALTH CENTER</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="../pharmacy/pharmacy.html" class="nav-link">VIEW STORE</a></li>
+        <li class="nav-item"><a href="../index.html" class="nav-link">HOME</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-logout>SIGN OUT</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="admin-section">
+    <div class="admin-header reveal active">
+      <h2 class="section-title">ADMIN CONTROL</h2>
+      <div class="title-line" style="margin: 0 auto 14px auto;"></div>
+      <p class="admin-sub">
+        SIGNED IN AS <span id="adminEmail">—</span>
+        · <button type="button" class="admin-inline-link" id="changePasswordBtn">CHANGE PASSWORD</button>
+      </p>
+    </div>
+
+    <div class="admin-tabs">
+      <button type="button" class="admin-tab active" data-panel="inventory">INVENTORY</button>
+      <button type="button" class="admin-tab" data-panel="orders">ORDERS</button>
+      <button type="button" class="admin-tab" data-panel="users">USERS</button>
+      <button type="button" class="admin-tab" data-panel="chat">LIVE CHAT</button>
+    </div>
+
+    <p class="admin-toast" id="adminToast"></p>
+
+    <!-- INVENTORY -->
+    <div class="admin-panel active" id="panel-inventory">
+      <div class="panel-toolbar">
+        <p class="panel-count" id="inventoryCount">— ITEMS</p>
+        <div class="panel-actions">
+          <button type="button" class="magnetic-btn" id="seedBtn" hidden>SEED STARTER CATALOGUE</button>
+          <button type="button" class="magnetic-btn admin-primary-btn" id="addMedicineBtn">+ ADD MEDICINE</button>
+        </div>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>NAME</th>
+              <th>CATEGORY</th>
+              <th>PRICE</th>
+              <th>STOCK</th>
+              <th>RX</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="inventoryBody">
+            <tr><td colspan="6" class="empty-state">LOADING INVENTORY…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="load-more-btn" id="inventoryLoadMore" hidden>LOAD MORE</button>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="admin-panel" id="panel-orders">
+      <div class="panel-toolbar">
+        <p class="panel-count" id="ordersCount">— ORDERS</p>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>CUSTOMER</th>
+              <th>ITEMS</th>
+              <th>TOTAL</th>
+              <th>STATUS</th>
+              <th>PLACED</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody">
+            <tr><td colspan="5" class="empty-state">NO ORDERS YET — THE CHECKOUT MODULE IS NEXT UP.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="load-more-btn" id="ordersLoadMore" hidden>LOAD MORE</button>
+    </div>
+
+    <!-- USERS -->
+    <div class="admin-panel" id="panel-users">
+      <div class="panel-toolbar">
+        <p class="panel-count" id="usersCount">— ACCOUNTS</p>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>ROLE</th>
+              <th>JOINED</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="usersBody">
+            <tr><td colspan="5" class="empty-state">LOADING ACCOUNTS…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="load-more-btn" id="usersLoadMore" hidden>LOAD MORE</button>
+    </div>
+
+    <!-- LIVE CHAT -->
+    <div class="admin-panel" id="panel-chat">
+      <div class="chat-admin-layout">
+        <div class="chat-admin-list">
+          <div id="chatList"></div>
+          <button type="button" class="load-more-btn" id="chatListLoadMore" hidden>LOAD MORE CONVERSATIONS</button>
+        </div>
+
+        <div class="chat-admin-active">
+          <p class="empty-state" id="chatEmptyState">SELECT A CONVERSATION TO VIEW IT.</p>
+
+          <div class="chat-admin-thread" id="chatActiveView" hidden>
+            <div class="chat-admin-thread-head" id="chatActiveName">—</div>
+            <button type="button" class="chat-load-more" id="chatMsgLoadMore" hidden>LOAD EARLIER MESSAGES</button>
+            <div class="chat-messages" id="chatMessagesAdmin"></div>
+            <form class="chat-input-row" id="chatReplyForm">
+              <input type="text" id="chatReplyInput" placeholder="TYPE A REPLY…" autocomplete="off" />
+              <button type="submit" aria-label="Send">SEND</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add / Edit Medicine Modal -->
+  <div class="admin-modal-overlay" id="medicineModalOverlay">
+    <div class="admin-modal">
+      <div class="admin-modal-head">
+        <h3 id="medicineModalTitle">ADD MEDICINE</h3>
+        <button type="button" class="admin-modal-close" id="closeMedicineModal">&times;</button>
+      </div>
+
+      <form id="medicineForm">
+        <input type="hidden" id="medicineId" />
+
+        <div class="input-group">
+          <input type="text" id="medName" required />
+          <label for="medName">NAME</label>
+        </div>
+
+        <div class="admin-field-row">
+          <div class="admin-select-group">
+            <label for="medCategory">CATEGORY</label>
+            <select id="medCategory" required>
+              <option value="VITAMINS">VITAMINS</option>
+              <option value="CHRONIC CARE">CHRONIC CARE</option>
+              <option value="SUPPLEMENT">SUPPLEMENT</option>
+            </select>
+          </div>
+          <div class="admin-select-group">
+            <label for="medStock">STOCK STATUS</label>
+            <select id="medStock" required>
+              <option value="IN STOCK">IN STOCK</option>
+              <option value="LOW STOCK">LOW STOCK</option>
+              <option value="OUT OF STOCK">OUT OF STOCK</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <textarea id="medDescription" rows="3" required></textarea>
+          <label for="medDescription">DESCRIPTION</label>
+        </div>
+
+        <div class="admin-field-row">
+          <div class="input-group">
+            <input type="number" id="medPrice" step="0.01" min="0" required />
+            <label for="medPrice">PRICE (USD)</label>
+          </div>
+          <label class="admin-checkbox">
+            <input type="checkbox" id="medRx" />
+            REQUIRES PRESCRIPTION
+          </label>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="medImage" />
+          <label for="medImage">IMAGE PATH (OPTIONAL)</label>
+        </div>
+
+        <button type="submit" class="magnetic-btn submit-btn admin-primary-btn" id="medicineSubmitBtn">SAVE MEDICINE</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div class="admin-modal-overlay" id="passwordModalOverlay">
+    <div class="admin-modal">
+      <div class="admin-modal-head">
+        <h3>CHANGE PASSWORD</h3>
+        <button type="button" class="admin-modal-close" id="closePasswordModal">&times;</button>
+      </div>
+
+      <form id="passwordForm">
+        <div class="input-group">
+          <input type="password" id="pwCurrent" required />
+          <label for="pwCurrent">CURRENT PASSWORD</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="pwNew" required minlength="6" />
+          <label for="pwNew">NEW PASSWORD (MIN 6 CHARACTERS)</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="pwConfirm" required minlength="6" />
+          <label for="pwConfirm">CONFIRM NEW PASSWORD</label>
+        </div>
+        <button type="submit" class="magnetic-btn submit-btn admin-primary-btn" id="passwordSubmitBtn">UPDATE PASSWORD</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../script/cursor.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

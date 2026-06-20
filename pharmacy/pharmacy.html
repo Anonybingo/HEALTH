@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pharmacy Portal | MSPlanning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="../style/style.css" />
+  <link rel="stylesheet" href="pharmacy.css" />
+  
+</head>
+<body>
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">HEALTH CENTER</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link">HOME</a></li>
+        <li class="nav-item"><a href="pharmacy.html" class="nav-link">PHARMACY</a></li>
+        <li class="nav-item"><a href="../index.html#about" class="nav-link">ABOUT</a></li>
+        <li class="nav-item"><a href="../index.html#contact" class="nav-link">CONTACT</a></li>
+        <li class="nav-item">
+          <a href="../auth/auth.html" class="nav-link" id="navAuthLink">SIGN IN</a>
+          
+          <ul class="auth-dropdown" id="authDropdown" style="display: none;">
+            <li><a href="profile/profile.html">Profile</a></li>
+            <li><a href="cart/cart.html">Cart</a></li>
+            <li><a href="history/history.html">Order History</a></li>
+            <li><a href="chat/chat.html">Live Chat</a></li>
+            <li><a href="settings/settings.html">Settings</a></li>
+            <li><button data-logout class="logout-btn">Logout</button></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="access-catalogue" class="catalogue-section">
+    <div class="catalogue-header reveal">
+      <h2 class="section-title">PHARMACY ACCESS GRID</h2>
+      <div class="title-line"></div>
+      
+      <div class="filter-controls">
+        <button class="filter-btn active" data-filter="ALL">ALL SYSTEMS</button>
+        <button class="filter-btn" data-filter="VITAMINS">VITAMINS</button>
+        <button class="filter-btn" data-filter="CHRONIC CARE">CHRONIC CARE</button>
+        <button class="filter-btn" data-filter="SUPPLEMENT">SUPPLEMENTS</button>
+      </div>
+    </div>
+
+    <div class="medicine-grid reveal" id="medicineGrid"></div>
+  </section>
+
+  <footer class="footer-section">
+    <canvas id="leafCanvas" class="leaf-canvas"></canvas>
+    <div class="footer-container reveal">
+      <div class="footer-grid">
+        <div class="footer-col branding">
+          <div class="navbar-logo">HEALTH CENTER</div>
+          <p class="footer-desc">ELEVATING LONGEVITY AND PEAK PERFORMANCE THROUGH ADVANCED MEDICAL SCIENCE AND KINETIC THERAPIES.</p>
+        </div>
+        <div class="footer-col links">
+          <h4>NAVIGATION</h4>
+          <ul>
+            <li><a href="../index.html" class="nav-link">HOME</a></li>
+            <li><a href="pharmacy.html" class="nav-link">PHARMACY</a></li>
+            <li><a href="../index.html#contact" class="nav-link">CONTACT</a></li>
+          </ul>
+        </div>
+        <div class="footer-col contact-info">
+          <h4>CONNECT</h4>
+          <p>TRANSMISSION: INFO@HEALTHCENTER.COM</p>
+          <p>CORE SYSTEM: +250 790 778 146</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HEALTH CENTER. ALL RIGHTS RESERVED.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script/cursor.js"></script>
+  <script src="inventory.js"></script>
+  <script src="pharmacy.js"></script>
+  <script type="module">
+    import { initNavAuth } from "../firebase/nav-auth.js";
+    initNavAuth("../");
+  </script>
+</body>
+</html>
