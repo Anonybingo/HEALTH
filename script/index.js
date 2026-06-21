@@ -470,3 +470,66 @@ if (footerCanvas) {
   
   animateLeaves();
 }
+
+
+/* ── Text Decryptor Animation ────────────────────────────── */
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~`|}{[]:;?><,./-=";
+const decryptElements = document.querySelectorAll(".decrypt-text");
+
+const decryptObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      let iterations = 0;
+      const element = entry.target;
+      const finalWord = element.dataset.value;
+      
+      // prevent re-triggering if already animating
+      if (element.dataset.animating === "true") return;
+      element.dataset.animating = "true";
+
+      const interval = setInterval(() => {
+        element.innerText = finalWord
+          .split("")
+          .map((letter, index) => {
+            if (index < iterations) {
+              return finalWord[index];
+            }
+            return letters[Math.floor(Math.random() * letters.length)];
+          })
+          .join("");
+
+        if (iterations >= finalWord.length) {
+          clearInterval(interval);
+          element.dataset.animating = "false";
+        }
+        iterations += 1 / 3; // Controls the speed of the decryption
+      }, 30);
+      
+      decryptObserver.unobserve(element); // Only run once per page load
+    }
+  });
+}, { threshold: 0.5 });
+
+decryptElements.forEach(el => decryptObserver.observe(el));
+
+/* ── Interactive Neural Cell Logic ───────────────────────── */
+const neuralCell = document.querySelector('.neural-cell');
+
+if (neuralCell) {
+  document.addEventListener('mousemove', (e) => {
+    const rect = neuralCell.getBoundingClientRect();
+    
+    // CALCULATE MOUSE POSITION PERCENTAGE RELATIVE TO ELEMENT
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    // APPLY TO CSS VARIABLES
+    neuralCell.style.setProperty('--mouse-x', `${x}%`);
+    neuralCell.style.setProperty('--mouse-y', `${y}%`);
+    
+    // PUSH EFFECT: MOVE THE CELL SLIGHTLY TOWARD THE MOUSE
+    const moveX = (x - 50) / 5;
+    const moveY = (y - 50) / 5;
+    neuralCell.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  });
+}

@@ -11,6 +11,15 @@
 </head>
 <body>
   <div class="custom-cursor" id="customCursor"></div>
+  <div id="teamModal" class="team-overlay">
+    <div class="team-modal-content">
+      <button id="closeTeamBtn" class="close-btn">X</button>
+    
+      <h2 class="modal-title">OUR SPECIALISTS</h2>
+    
+      <div class="team-grid" id="teamGrid"></div>
+    </div>
+  </div>
   <section class="hero-wrapper">
 
     <!-- Loader screen -->
@@ -21,8 +30,8 @@
       </div>
       <span class="loader-label">LOADING</span>
     </div>
-  </div>
-  <nav class="navbar">
+    </div>
+    <nav class="navbar">
     <div class="navbar-container">
       <a href="index.html"><div class="navbar-logo">MS PLANNING</div></a>
       <ul class="nav-menu">
@@ -44,9 +53,9 @@
         </li>
       </ul>
     </div>
-  </nav>
-  <!-- Main scene -->
-  <main class="scene" id="scene">
+    </nav>
+    <!-- Main scene -->
+    <main class="scene" id="scene">
     
     <!-- Background panel -->
     <div class="bg-panels">
@@ -102,7 +111,7 @@
     </div>
 
     </main>
-
+    
   </section>
 
   <section id="pharmacy-portal" class="portal-section reveal">
@@ -117,14 +126,27 @@
   <section id="about" class="about-section">
     <div class="about-container reveal">
       <div class="about-text">
-        <h2 class="section-title">ABOUT US</h2>
+        <h2 class="section-title decrypt-text" data-value="ABOUT US">ABOUT US</h2>
         <div class="title-line"></div>
         <p>we believe healthcare should be proactive, not reactive. our state-of-the-art facility combines cutting-edge diagnostics with compassionate care to ensure your peak performance.</p>
         <p>founded on the principle of excellence, we are your partners in long-term wellness and longevity.</p>
-        <button class="magnetic-btn">DISCOVER OUR TEAM</button>
+        <button class="magnetic-btn heartbeat-btn" id="teamTrigger">
+          <span>DISCOVER OUR TEAM</span>
+        </button>
       </div>
       <div class="about-visual">
-        <div class="abstract-shape"></div>
+        <!-- <div class="abstract-shape"></div> -->
+        <!-- <div class="hologram-core">
+          <div class="holo-ring ring-1"></div>
+          <div class="holo-ring ring-2"></div>
+          <div class="holo-ring ring-3"></div>
+          <div class="holo-center"></div>
+        </div> -->
+        <div class="neural-cell">
+          <div class="cell-layer layer-back"></div>
+          <div class="cell-layer layer-mid"></div>
+          <div class="cell-layer layer-front"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -134,20 +156,25 @@
       <h2 class="section-title">REACH OUT</h2>
       <p class="contact-sub">ready to prioritize your health? drop us a message.</p>
       
-      <form class="contact-form" onsubmit="event.preventDefault();">
+      <form class="contact-form" id="contactForm" onsubmit="event.preventDefault();">
         <div class="input-group">
           <input type="text" id="name" required>
           <label for="name">YOUR NAME</label>
         </div>
         <div class="input-group">
-          <input type="email" id="email" required>
+          <input type="email" id="email" name="email" required>
           <label for="email">YOUR EMAIL</label>
         </div>
         <div class="input-group">
-          <textarea id="message" rows="4" required></textarea>
+          <input type="tel" id="phone" name="phone" required>
+          <label for="email">YOUR PHONE NUMBER</label>
+        </div>
+        <div class="input-group">
+          <textarea id="message" name="message" rows="4" required></textarea>
           <label for="message">YOUR MESSAGE</label>
         </div>
         <button type="submit" class="magnetic-btn submit-btn">SEND TRANSMISSION</button>
+        <div id="formStatus" style="margin-top: 10px; padding: 10px; display: none;"></div>
       </form>
     </div>
   </section>
@@ -193,6 +220,9 @@
   </footer>
 
   <script src="script/index.js"></script>
+  <script src="script/about.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="script/emailhandler.js"></script>
   <script type="module">
     import { initNavAuth } from "./firebase/nav-auth.js";
     initNavAuth("");

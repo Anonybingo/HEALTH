@@ -427,51 +427,6 @@ cards.forEach(card => {
   });
 });
 
-// // custom cursor logic
-// const cursor = document.getElementById('customCursor');
-// const interactiveElements = document.querySelectorAll('a, button, .service-item, .magnetic-btn');
-
-// document.addEventListener('mousemove', (e) => {
-//   // moves the cursor ring to the exact mouse coordinates
-//   cursor.style.left = e.clientX + 'px';
-//   cursor.style.top = e.clientY + 'px';
-// });
-
-// // add the expanding effect when hovering over links or cards
-// interactiveElements.forEach(el => {
-//   el.addEventListener('mouseenter', () => {
-//     cursor.classList.add('hovering');
-//   });
-//   el.addEventListener('mouseleave', () => {
-//     cursor.classList.remove('hovering');
-//   });
-// });
-
-// magnetic effect for interactive items
-// const magneticItems = document.querySelectorAll('.nav-link, .navbar-logo, .magnetic-btn');
-
-// magneticItems.forEach(item => {
-//   item.addEventListener('mousemove', (e) => {
-//     const rect = item.getBoundingClientRect();
-    
-//     // find the exact centerpoint of the link text
-//     const itemCenterX = rect.left + rect.width / 2;
-//     const itemCenterY = rect.top + rect.height / 2;
-    
-//     // calculate how far away the mouse cursor is from the center
-//     const distanceX = e.clientX - itemCenterX;
-//     const distanceY = e.clientY - itemCenterY;
-    
-//     // pull the item 30% of the distance toward the cursor
-//     item.style.transform = `translate(${distanceX * 0.3}px, ${distanceY * 0.3}px)`;
-//   });
-
-//   // snap back smoothly when mouse exits the boundary
-//   item.addEventListener('mouseleave', () => {
-//     item.style.transform = 'translate(0px, 0px)';
-//   });
-// });
-
 // ── LEAF PARTICLE MATHEMATICS FOR FOOTER ──────────────────
 class LeafParticle {
   constructor(canvas) {
@@ -565,3 +520,54 @@ if (footerCanvas) {
   
   animateLeaves();
 }
+
+/* ── TEAM MODAL LOGIC ────────────────────────────────────── */
+const modal = document.getElementById('teamModal');
+const grid = document.getElementById('teamGrid');
+const openBtn = document.querySelector('.magnetic-btn'); // ADJUST SELECTOR IF NEEDED
+const closeBtn = document.getElementById('closeTeamBtn');
+
+const teamData = [
+  {
+    name: "DR. ALEX RIVERS",
+    role: "CHIEF SURGEON",
+    spec: "NEUROLOGY",
+    exp: "15 YEARS",
+    bio: "SPECIALIZING IN ADVANCED SYNAPTIC REPAIR AND NEURAL MAPPING."
+  },
+  {
+    name: "SARAH VANCE",
+    role: "PHARMACIST",
+    spec: "CLINICAL PHARMACOLOGY",
+    exp: "8 YEARS",
+    bio: "EXPERT IN BIO-SYNTHETIC COMPOUNDING AND LONGEVITY SUPPLEMENTS."
+  }
+];
+
+function openTeamModal() {
+  modal.style.display = 'flex';
+  
+  // POPULATE GRID
+  grid.innerHTML = teamData.map(member => `
+    <div class="member-card">
+      <div class="member-photo"></div>
+      <h3>${member.name}</h3>
+      <p><strong>${member.role}</strong> | ${member.spec}</p>
+      <p><small>EXP: ${member.exp}</small></p>
+      <p>${member.bio}</p>
+    </div>
+  `).join('');
+}
+
+function closeTeamModal() {
+  modal.style.display = 'none';
+}
+
+// TRIGGERS
+openBtn.addEventListener('click', openTeamModal);
+closeBtn.addEventListener('click', closeTeamModal);
+
+// CLICK OUTSIDE TO CLOSE
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) closeTeamModal();
+});
