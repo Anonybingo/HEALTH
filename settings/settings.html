@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Settings | HEALTH CENTER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style/style.css" />
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">HEALTH CENTER</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link">HOME</a></li>
+        <li class="nav-item"><a href="../pharmacy/pharmacy.html" class="nav-link">PHARMACY</a></li>
+        <li class="nav-item"><a href="../index.html#about" class="nav-link">ABOUT</a></li>
+        <li class="nav-item"><a href="../index.html#contact" class="nav-link">CONTACT</a></li>
+        <li class="nav-item">
+          <a href="../auth/auth.html" class="nav-link" id="navAuthLink">SIGN IN</a>
+
+          <ul class="auth-dropdown" id="authDropdown" style="display: none;">
+            <li><a href="../profile/profile.html">Profile</a></li>
+            <li><a href="../cart/cart.html">Cart</a></li>
+            <li><a href="../history/history.html">Order History</a></li>
+            <li><a href="../chat/chat.html">Live Chat</a></li>
+            <li><a href="settings.html">Settings</a></li>
+            <li><button data-logout class="logout-btn">Logout</button></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="settings-section">
+    <div class="settings-card reveal active">
+      <div class="settings-head">
+        <h2 class="section-title">ACCOUNT SETTINGS</h2>
+        <div class="title-line" style="margin: 0 auto 20px auto;"></div>
+        <p class="settings-sub">CHANGE YOUR PASSWORD BELOW. WE'LL ASK FOR YOUR CURRENT ONE FIRST.</p>
+      </div>
+
+      <p class="settings-toast" id="settingsToast"></p>
+
+      <form id="passwordForm">
+        <div class="input-group">
+          <input type="password" id="pwCurrent" required />
+          <label for="pwCurrent">CURRENT PASSWORD</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="pwNew" required minlength="6" />
+          <label for="pwNew">NEW PASSWORD (MIN 6 CHARACTERS)</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="pwConfirm" required minlength="6" />
+          <label for="pwConfirm">CONFIRM NEW PASSWORD</label>
+        </div>
+        <button type="submit" class="magnetic-btn submit-btn" id="pwSubmitBtn">UPDATE PASSWORD</button>
+      </form>
+    </div>
+  </section>
+
+  <script src="../script/cursor.js"></script>
+  <script type="module" src="settings.js"></script>
+  <script type="module">
+    import { initNavAuth } from "../firebase/nav-auth.js";
+    initNavAuth("../");
+  </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+/* cart/cart.css - Local Module Styles */
+
+.cart-section {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to top, var(--main), var(--offblk));
+  padding: 150px 24px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.cart-layout {
+  width: 100%;
+  max-width: 980px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 30px;
+  align-items: start;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.empty-state {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 60px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(0, 210, 255, 0.015);
+}
+
+.empty-state a {
+  color: var(--accent);
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 70px 1fr auto auto;
+  gap: 18px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(0, 210, 255, 0.015);
+}
+
+.cart-item-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cart-item-image img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.cart-item-info h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.cart-item-info span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-qty button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  font-size: 14px;
+  cursor: none;
+  transition: all 0.2s ease;
+}
+
+.cart-qty button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.cart-qty span {
+  min-width: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--white);
+}
+
+.cart-item-remove {
+  background: transparent;
+  border: none;
+  color: rgba(255, 85, 85, 0.6);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  cursor: none;
+  white-space: nowrap;
+}
+
+.cart-item-remove:hover {
+  color: #ff5555;
+}
+
+.cart-summary {
+  position: sticky;
+  top: 150px;
+  padding: 28px;
+  border: 1px solid rgba(0, 210, 255, 0.1);
+  border-radius: 16px;
+  background: rgba(0, 210, 255, 0.02);
+}
+
+.cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.cart-summary-row span:last-child {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+.cart-summary-note {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.cart-checkout-btn {
+  width: 100%;
+}
+
+.cart-checkout-btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.cart-toast {
+  display: none;
+  margin-top: 16px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00ff87;
+  background: rgba(0, 255, 135, 0.08);
+  border: 1px solid rgba(0, 255, 135, 0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.cart-toast.show {
+  display: block;
+}
+
+.cart-toast.error {
+  color: #ff5555;
+  background: rgba(255, 85, 85, 0.08);
+  border-color: rgba(255, 85, 85, 0.25);
+}
+
+@media (max-width: 760px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+  .cart-summary {
+    position: static;
+  }
+  .cart-item {
+    grid-template-columns: 56px 1fr;
+    grid-template-areas:
+      "image info"
+      "image qty"
+      "remove remove";
+    row-gap: 10px;
+  }
+  .cart-item-image { grid-area: image; }
+  .cart-item-info { grid-area: info; }
+  .cart-qty { grid-area: qty; }
+  .cart-item-remove { grid-area: remove; justify-self: start; }
+}

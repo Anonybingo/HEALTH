@@ -3,7 +3,9 @@
 // This file isn't loaded by the browser — paste its contents into:
 // Firebase Console → Firestore Database → Rules tab → Publish
 //
-// Will be extended as the admin dashboard, orders, and chat get built out.
+// CHANGED THIS ROUND: added the `carts` collection. You need to
+// re-publish this one (previous rounds didn't require a republish, this
+// one does).
 
 rules_version = '2';
 service cloud.firestore {
@@ -44,6 +46,11 @@ service cloud.firestore {
       allow update: if isAdmin() ||
         (isSignedIn() && resource.data.userId == request.auth.uid && resource.data.status == "PENDING");
       allow delete: if isAdmin();
+    }
+
+    // ── cart: one per customer, keyed by their uid ──────────────────────
+    match /carts/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
     }
 
     // ── live chat: one thread per customer, keyed by their uid ──────────

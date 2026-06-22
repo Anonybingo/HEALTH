@@ -1,0 +1,107 @@
+/* history/history.css - Local Module Styles */
+
+.history-section {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to top, var(--main), var(--offblk));
+  padding: 150px 24px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.history-header {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.panel-count {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.history-table-wrap {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 30px;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(0, 210, 255, 0.015);
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+}
+
+.history-table th {
+  text-align: left;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.history-table td {
+  padding: 16px 20px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.history-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.empty-state {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.1em;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 50px 20px;
+}
+
+.empty-state a {
+  color: var(--accent);
+}
+
+.pill {
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 5px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.pill.order-pending   { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.15); }
+.pill.order-confirmed { background: rgba(0, 210, 255, 0.1); color: var(--accent); border: 1px solid rgba(0, 210, 255, 0.25); }
+.pill.order-shipped   { background: rgba(255, 200, 0, 0.1); color: #ffc800; border: 1px solid rgba(255, 200, 0, 0.25); }
+.pill.order-delivered { background: rgba(0, 255, 135, 0.1); color: #00ff87; border: 1px solid rgba(0, 255, 135, 0.25); }
+
+.load-more-btn {
+  display: block;
+  margin: 18px auto 0 auto;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 10px 26px;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  border-radius: 30px;
+  cursor: none;
+  transition: all 0.25s ease;
+}
+
+.load-more-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}

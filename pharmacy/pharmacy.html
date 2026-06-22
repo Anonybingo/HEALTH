@@ -27,11 +27,11 @@
           <a href="../auth/auth.html" class="nav-link" id="navAuthLink">SIGN IN</a>
           
           <ul class="auth-dropdown" id="authDropdown" style="display: none;">
-            <li><a href="profile/profile.html">Profile</a></li>
-            <li><a href="cart/cart.html">Cart</a></li>
-            <li><a href="history/history.html">Order History</a></li>
-            <li><a href="chat/chat.html">Live Chat</a></li>
-            <li><a href="settings/settings.html">Settings</a></li>
+            <li><a href="../profile/profile.html">Profile</a></li>
+            <li><a href="../cart/cart.html">Cart</a></li>
+            <li><a href="../history/history.html">Order History</a></li>
+            <li><a href="../chat/chat.html">Live Chat</a></li>
+            <li><a href="../settings/settings.html">Settings</a></li>
             <li><button data-logout class="logout-btn">Logout</button></li>
           </ul>
         </li>
@@ -85,7 +85,7 @@
 
   <script src="../script/cursor.js"></script>
   <script src="inventory.js"></script>
-  <script src="pharmacy.js"></script>
+  <script type="module" src="pharmacy.js"></script>
   <script type="module">
     import { initNavAuth } from "../firebase/nav-auth.js";
     initNavAuth("../");

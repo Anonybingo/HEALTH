@@ -1,0 +1,73 @@
+/* settings/settings.css - Local Module Styles */
+
+.settings-section {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to top, var(--main), var(--offblk));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 160px 20px 100px;
+}
+
+.settings-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 50px 40px;
+  background: rgba(0, 210, 255, 0.02);
+  border: 1px solid rgba(0, 210, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0, 210, 255, 0.05);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.settings-head .section-title {
+  font-size: clamp(28px, 5vw, 42px);
+}
+
+.settings-sub {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+#passwordForm {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  text-align: left;
+  margin-top: 30px;
+}
+
+.settings-toast {
+  display: none;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00ff87;
+  background: rgba(0, 255, 135, 0.08);
+  border: 1px solid rgba(0, 255, 135, 0.25);
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-top: 24px;
+}
+
+.settings-toast.show {
+  display: block;
+}
+
+.settings-toast.error {
+  color: #ff5555;
+  background: rgba(255, 85, 85, 0.08);
+  border-color: rgba(255, 85, 85, 0.25);
+}
+
+@media (max-width: 480px) {
+  .settings-card {
+    padding: 40px 24px;
+  }
+}
