@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="../style/style.css" />
   <link rel="stylesheet" href="chat.css" />
 </head>
@@ -24,8 +23,7 @@
         <li class="nav-item"><a href="../index.html#contact" class="nav-link">CONTACT</a></li>
         <li class="nav-item">
           <a href="../auth/auth.html" class="nav-link" id="navAuthLink">SIGN IN</a>
-
-          <ul class="auth-dropdown" id="authDropdown" style="display: none;">
+          <ul class="auth-dropdown" id="authDropdown" style="display:none;">
             <li><a href="../profile/profile.html">Profile</a></li>
             <li><a href="../cart/cart.html">Cart</a></li>
             <li><a href="../history/history.html">Order History</a></li>
@@ -50,8 +48,19 @@
       <div class="chatpage-messages" id="chatMessages">
         <p class="empty-state">LOADING CONVERSATION…</p>
       </div>
+
       <form class="chatpage-input-row" id="chatForm">
         <input type="text" id="chatInput" placeholder="TYPE A MESSAGE…" autocomplete="off" />
+
+        <!-- Recording-in-progress bar (replaces the text input while recording) -->
+        <div class="voice-recording-bar" id="voiceRecordingBar">
+          <span class="rec-dot"></span>
+          <span id="voiceTimer">0:00</span>
+          <span>RECORDING…</span>
+          <button type="button" class="rec-cancel" id="voiceCancelBtn">CANCEL</button>
+        </div>
+
+        <button type="button" class="voice-record-btn" id="voiceRecordBtn" aria-label="Record voice message"></button>
         <button type="submit" class="magnetic-btn">SEND</button>
       </form>
     </div>

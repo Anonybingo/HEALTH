@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Initial Setup | HEALTH CENTER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style/style.css" />
+  <link rel="stylesheet" href="setup.css" />
+</head>
+<body>
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">HEALTH CENTER</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link">HOME</a></li>
+        <li class="nav-item"><a href="../auth/auth.html" class="nav-link">SIGN IN</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="setup-section">
+    <div class="setup-card">
+
+      <!-- Loading state -->
+      <div id="stateLoading">
+        <p class="setup-status">CHECKING SYSTEM STATUS…</p>
+      </div>
+
+      <!-- Not signed in -->
+      <div id="stateSignedOut" hidden>
+        <h2 class="section-title">SETUP</h2>
+        <div class="title-line" style="margin:0 auto 24px;"></div>
+        <p class="setup-status">YOU MUST BE SIGNED IN TO CLAIM ADMIN ACCESS.</p>
+        <a href="../auth/auth.html" class="magnetic-btn" style="display:inline-block;text-decoration:none;margin-top:20px;">SIGN IN</a>
+      </div>
+
+      <!-- Already locked -->
+      <div id="stateLocked" hidden>
+        <h2 class="section-title">SETUP COMPLETE</h2>
+        <div class="title-line" style="margin:0 auto 24px;"></div>
+        <p class="setup-status">AN ADMIN ACCOUNT ALREADY EXISTS.<br>THIS PAGE IS NOW LOCKED.</p>
+        <a href="../auth/auth.html" class="magnetic-btn" style="display:inline-block;text-decoration:none;margin-top:20px;">SIGN IN</a>
+      </div>
+
+      <!-- Current user is already admin -->
+      <div id="stateAlreadyAdmin" hidden>
+        <h2 class="section-title">ALREADY ADMIN</h2>
+        <div class="title-line" style="margin:0 auto 24px;"></div>
+        <p class="setup-status" id="alreadyAdminEmail">—</p>
+        <a href="../admin/admin.html" class="magnetic-btn" style="display:inline-block;text-decoration:none;margin-top:20px;">OPEN ADMIN PANEL</a>
+      </div>
+
+      <!-- Ready to claim -->
+      <div id="stateClaim" hidden>
+        <h2 class="section-title">CLAIM ADMIN</h2>
+        <div class="title-line" style="margin:0 auto 24px;"></div>
+        <p class="setup-hint">
+          NO ADMIN EXISTS YET.<br>
+          CLICK BELOW TO PROMOTE YOUR ACCOUNT TO ADMIN.<br>
+          THIS PAGE LOCKS ITSELF AFTER THE FIRST CLAIM.
+        </p>
+
+        <div class="setup-info-box">
+          <div class="setup-info-row">
+            <span>EMAIL</span>
+            <strong id="claimEmail">—</strong>
+          </div>
+          <div class="setup-info-row">
+            <span>CURRENT ROLE</span>
+            <strong id="claimRole">—</strong>
+          </div>
+        </div>
+
+        <p class="setup-error" id="setupError" hidden></p>
+
+        <button type="button" class="magnetic-btn setup-claim-btn" id="claimBtn">
+          PROMOTE TO ADMIN
+        </button>
+      </div>
+
+      <!-- Success -->
+      <div id="stateSuccess" hidden>
+        <h2 class="section-title">ACCESS GRANTED</h2>
+        <div class="title-line" style="margin:0 auto 24px;"></div>
+        <p class="setup-status setup-success">
+          ✓ YOUR ACCOUNT IS NOW ADMIN.<br>REDIRECTING TO THE ADMIN PANEL…
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="../script/cursor.js"></script>
+  <script type="module" src="setup.js"></script>
+</body>
+</html>

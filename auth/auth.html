@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="../style/style.css" />
   <link rel="stylesheet" href="auth.css" />
 </head>
@@ -50,6 +49,10 @@
         <div class="input-group">
           <input type="password" id="signinPassword" required minlength="6" />
           <label for="signinPassword">PASSWORD</label>
+          <button type="button" class="pw-toggle" data-target="signinPassword" aria-label="Toggle password">
+            <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-icon eye-closed eye-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
         </div>
         <button type="submit" class="magnetic-btn submit-btn auth-submit">
           <span class="btn-label">SIGN IN</span>
@@ -69,10 +72,18 @@
         <div class="input-group">
           <input type="password" id="signupPassword" required minlength="6" />
           <label for="signupPassword">PASSWORD (MIN 6 CHARACTERS)</label>
+          <button type="button" class="pw-toggle" data-target="signupPassword" aria-label="Toggle password">
+            <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-icon eye-closed eye-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
         </div>
         <div class="input-group">
           <input type="password" id="signupConfirm" required minlength="6" />
           <label for="signupConfirm">CONFIRM PASSWORD</label>
+          <button type="button" class="pw-toggle" data-target="signupConfirm" aria-label="Toggle password">
+            <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-icon eye-closed eye-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
         </div>
         <button type="submit" class="magnetic-btn submit-btn auth-submit">
           <span class="btn-label">CREATE ACCOUNT</span>

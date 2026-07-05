@@ -7,10 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
-  
   <link rel="stylesheet" href="../style/style.css" />
   <link rel="stylesheet" href="pharmacy.css" />
-  
 </head>
 <body>
   <div class="custom-cursor" id="customCursor"></div>
@@ -25,8 +23,7 @@
         <li class="nav-item"><a href="../index.html#contact" class="nav-link">CONTACT</a></li>
         <li class="nav-item">
           <a href="../auth/auth.html" class="nav-link" id="navAuthLink">SIGN IN</a>
-          
-          <ul class="auth-dropdown" id="authDropdown" style="display: none;">
+          <ul class="auth-dropdown" id="authDropdown" style="display:none;">
             <li><a href="../profile/profile.html">Profile</a></li>
             <li><a href="../cart/cart.html">Cart</a></li>
             <li><a href="../history/history.html">Order History</a></li>
@@ -43,7 +40,6 @@
     <div class="catalogue-header reveal">
       <h2 class="section-title">PHARMACY ACCESS GRID</h2>
       <div class="title-line"></div>
-      
       <div class="filter-controls">
         <button class="filter-btn active" data-filter="ALL">ALL SYSTEMS</button>
         <button class="filter-btn" data-filter="VITAMINS">VITAMINS</button>
@@ -51,7 +47,6 @@
         <button class="filter-btn" data-filter="SUPPLEMENT">SUPPLEMENTS</button>
       </div>
     </div>
-
     <div class="medicine-grid reveal" id="medicineGrid"></div>
   </section>
 
@@ -84,7 +79,9 @@
   </footer>
 
   <script src="../script/cursor.js"></script>
+  <!-- inventory.js runs first as a plain script → defines global pharmacyInventory -->
   <script src="inventory.js"></script>
+  <!-- pharmacy.js is a module so it can import Firebase -->
   <script type="module" src="pharmacy.js"></script>
   <script type="module">
     import { initNavAuth } from "../firebase/nav-auth.js";

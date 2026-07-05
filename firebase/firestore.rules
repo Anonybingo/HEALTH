@@ -1,12 +1,3 @@
-// firebase/firestore.rules
-// ── Firestore security rules ────────────────────────────────────────────
-// This file isn't loaded by the browser — paste its contents into:
-// Firebase Console → Firestore Database → Rules tab → Publish
-//
-// CHANGED THIS ROUND: added the `carts` collection. You need to
-// re-publish this one (previous rounds didn't require a republish, this
-// one does).
-
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -25,7 +16,6 @@ service cloud.firestore {
         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
     }
 
-    // ── user profiles ──────────────────────────────────────────────────
     match /users/{userId} {
       allow read: if isOwner(userId) || isAdmin();
       allow create: if isOwner(userId);
@@ -33,13 +23,11 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // ── medicine catalogue (public read, admin-only write) ─────────────
     match /medicines/{medId} {
       allow read: if true;
       allow write: if isAdmin();
     }
 
-    // ── orders ───────────────────────────────────────────────────────
     match /orders/{orderId} {
       allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
       allow read: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
@@ -48,18 +36,21 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // ── cart: one per customer, keyed by their uid ──────────────────────
     match /carts/{userId} {
       allow read, write: if isOwner(userId) || isAdmin();
     }
 
-    // ── live chat: one thread per customer, keyed by their uid ──────────
     match /chats/{userId} {
       allow read, write: if isOwner(userId) || isAdmin();
 
       match /messages/{messageId} {
         allow read: if isOwner(userId) || isAdmin();
-        allow create: if isOwner(userId) || isAdmin();
+        // CHANGED: caps each message doc at ~900KB so a long voice note can't
+        // exceed Firestore's 1MB-per-document hard limit and silently fail.
+        // The client already caps recordings at 2 minutes (see voice-recorder.js)
+        // which in practice stays well under this, but this is the backstop.
+        allow create: if (isOwner(userId) || isAdmin()) &&
+          request.resource.size() < 900000;
       }
     }
   }

@@ -1,4 +1,4 @@
-/* auth/auth.css - Local Module Styles */
+/* auth/auth.css */
 
 .auth-section {
   width: 100%;
@@ -76,7 +76,6 @@
 .auth-submit {
   width: 100%;
   margin-top: 10px;
-  position: relative;
 }
 
 .auth-submit.loading {
@@ -99,6 +98,44 @@
 
 .auth-error.show {
   display: block;
+}
+
+/* ── Password eye toggle ─────────────────────────────────────────────── */
+
+/* Hides whichever icon is inactive — !important beats any flex/svg reset */
+.eye-hidden {
+  display: none !important;
+}
+
+.pw-toggle {
+  position: absolute;
+  right: 0;
+  bottom: 9px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: none;
+  transition: color 0.2s ease;
+  line-height: 0;
+}
+
+.pw-toggle:hover {
+  color: var(--accent);
+}
+
+.eye-icon {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  display: block;
+}
+
+/* Stop typed text from sliding under the icon */
+.input-group:has(.pw-toggle) input {
+  padding-right: 28px;
 }
 
 @media (max-width: 480px) {

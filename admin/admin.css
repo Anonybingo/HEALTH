@@ -1,481 +1,99 @@
-/* admin/admin.css - Local Module Styles */
+/* admin/admin.css */
+.admin-section{width:100%;min-height:100vh;background:linear-gradient(to top,var(--main),var(--offblk));padding:150px 24px 100px;display:flex;flex-direction:column;align-items:center}
+.admin-header{text-align:center;margin-bottom:30px}
+.admin-sub{color:rgba(255,255,255,.45);font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.admin-sub span{color:var(--accent)}
+.admin-inline-link{background:transparent;border:none;color:var(--accent);font-size:10px;letter-spacing:.18em;text-decoration:underline;text-underline-offset:3px;cursor:none}
+.admin-tabs{display:flex;gap:12px;margin-bottom:30px;flex-wrap:wrap;justify-content:center}
+.admin-tab{background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:10px 24px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.15em;border-radius:40px;transition:all .3s ease;cursor:none}
+.admin-tab.active{border-color:var(--accent);color:var(--accent);background:rgba(0,210,255,.08);box-shadow:0 0 15px rgba(0,210,255,.2)}
+.admin-toast{display:none;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#00ff87;background:rgba(0,255,135,.08);border:1px solid rgba(0,255,135,.25);border-radius:8px;padding:10px 18px;margin-bottom:20px}
+.admin-toast.show{display:block}
+.admin-toast.error{color:#ff5555;background:rgba(255,85,85,.08);border-color:rgba(255,85,85,.25)}
+.admin-panel{display:none;width:100%;max-width:1200px}
+.admin-panel.active{display:block}
+.panel-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:24px}
+.panel-count{font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.panel-actions{display:flex;gap:12px}
+.admin-primary-btn{border-color:rgba(0,210,255,.4)!important;color:var(--accent)!important}
+.admin-primary-btn:hover{background:var(--accent)!important;color:var(--black)!important}
+.admin-table-wrap{width:100%;overflow-x:auto;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(0,210,255,.015)}
+.admin-table{width:100%;border-collapse:collapse;min-width:640px}
+.admin-table th{text-align:left;font-size:9px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.08);white-space:nowrap}
+.admin-table td{padding:12px 20px;font-size:12px;color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
+.admin-table tbody tr:last-child td{border-bottom:none}
+.admin-table tbody tr:hover{background:rgba(0,210,255,.03)}
+.admin-table .empty-state{text-align:center;color:rgba(255,255,255,.35);letter-spacing:.1em;font-size:11px;text-transform:uppercase;padding:40px 20px}
+.load-more-btn{display:block;margin:18px auto 0;background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:10px 26px;font-size:9px;letter-spacing:.15em;border-radius:30px;cursor:none;transition:all .25s ease}
+.load-more-btn:hover{border-color:var(--accent);color:var(--accent)}
+.row-name{color:var(--white);font-weight:600}
+.row-actions{display:flex;gap:8px;justify-content:flex-end}
+.row-btn{background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:6px 14px;font-size:9px;letter-spacing:.1em;border-radius:20px;cursor:none;transition:all .25s ease}
+.row-btn:hover{border-color:var(--accent);color:var(--accent)}
+.row-btn.danger:hover{border-color:#ff5555;color:#ff5555}
+.row-btn:disabled{opacity:.35;pointer-events:none}
+.pill{display:inline-block;font-size:9px;letter-spacing:.1em;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.pill.stock-in{background:rgba(0,255,135,.1);color:#00ff87;border:1px solid rgba(0,255,135,.25)}
+.pill.stock-low{background:rgba(255,200,0,.1);color:#ffc800;border:1px solid rgba(255,200,0,.25)}
+.pill.stock-out{background:rgba(255,85,85,.1);color:#ff5555;border:1px solid rgba(255,85,85,.25)}
+.pill.role-admin{background:rgba(0,210,255,.1);color:var(--accent);border:1px solid rgba(0,210,255,.25)}
+.pill.role-customer{background:rgba(255,255,255,.06);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.15)}
+.status-select{background:var(--offblk);color:var(--white);border:1px solid rgba(255,255,255,.15);border-radius:20px;font-size:10px;letter-spacing:.08em;padding:6px 12px;cursor:none}
+.med-thumb{width:38px;height:38px;object-fit:contain;border-radius:6px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+/* ── Chat panel layout ── */
+.chat-admin-layout{display:grid;grid-template-columns:260px 1fr;gap:20px}
+.chat-admin-list{border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(0,210,255,.015);padding:8px;height:560px;overflow-y:auto}
+.chat-thread-btn{position:relative;width:100%;text-align:left;display:flex;flex-direction:column;gap:4px;background:transparent;border:none;border-radius:10px;padding:12px 30px 12px 14px;cursor:none;transition:background .2s ease}
+.chat-thread-btn:hover,.chat-thread-btn.active{background:rgba(0,210,255,.06)}
+.chat-thread-name{font-size:12px;color:var(--white)}
+.chat-thread-preview{font-size:10px;color:rgba(255,255,255,.4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-thread-dot{position:absolute;top:14px;right:12px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.chat-admin-active{border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(0,210,255,.015);height:560px;display:flex;align-items:center;justify-content:center}
+.chat-admin-thread{width:100%;height:100%;display:flex;flex-direction:column}
+.chat-admin-thread-head{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.08);font-size:11px;letter-spacing:.1em;color:var(--white);text-transform:uppercase}
+@media(max-width:800px){.chat-admin-layout{grid-template-columns:1fr}.chat-admin-list,.chat-admin-active{height:360px}}
+/* ── Modal ── */
+.admin-modal-overlay{display:none;position:fixed;inset:0;background:rgba(2,6,12,.75);backdrop-filter:blur(6px);z-index:999999;align-items:center;justify-content:center;padding:20px}
+.admin-modal-overlay.open{display:flex}
+.admin-modal{width:100%;max-width:460px;max-height:90vh;overflow-y:auto;background:var(--offblk);border:1px solid rgba(0,210,255,.15);border-radius:20px;box-shadow:0 0 60px rgba(0,210,255,.1);padding:36px}
+.admin-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.admin-modal-head h3{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.05em;color:var(--white)}
+.admin-modal-close{background:transparent;border:none;color:rgba(255,255,255,.5);font-size:26px;line-height:1;cursor:none}
+.admin-modal-close:hover{color:var(--white)}
+#medicineForm{display:flex;flex-direction:column;gap:28px}
+.admin-field-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end}
+.admin-select-group{display:flex;flex-direction:column;gap:8px}
+.admin-select-group label{font-size:9px;letter-spacing:.15em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.admin-select-group select{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.2);color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;padding:8px 0;cursor:none}
+.admin-checkbox{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.6);text-transform:uppercase;cursor:none}
+.admin-checkbox input{width:16px;height:16px;accent-color:var(--accent);cursor:none}
+.admin-image-field{display:flex;flex-direction:column;gap:8px}
+.admin-image-field-label{font-size:9px;letter-spacing:.15em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.admin-upload-area{display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px dashed rgba(0,210,255,.3);border-radius:12px;padding:24px 16px;cursor:none;transition:all .25s ease;min-height:100px;position:relative;overflow:hidden;gap:10px}
+.admin-upload-area:hover{border-color:var(--accent);background:rgba(0,210,255,.04)}
+.admin-upload-area input[type="file"]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:none}
+.upload-placeholder{font-size:10px;letter-spacing:.12em;color:rgba(255,255,255,.4);text-transform:uppercase;pointer-events:none;text-align:center}
+.upload-preview{max-width:100%;max-height:140px;object-fit:contain;border-radius:8px;pointer-events:none}
+@media(max-width:560px){.admin-field-row{grid-template-columns:1fr}.admin-modal{padding:28px 22px}}
 
-.admin-section {
-  width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(to top, var(--main), var(--offblk));
-  padding: 150px 24px 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/* ── Voice message bubble (admin chat thread) ── */
+.voice-bubble{display:flex;align-items:center;gap:10px;max-width:240px;padding:10px 14px;border-radius:16px}
+.voice-bubble.from-user{align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.voice-bubble.from-pharmacist{align-self:flex-end;background:rgba(0,210,255,.12);border:1px solid rgba(0,210,255,.25)}
+.voice-play-btn{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--black);border:none;cursor:none;display:flex;align-items:center;justify-content:center}
+.voice-play-btn svg{width:14px;height:14px}
+.voice-waveform{flex:1;height:22px;display:flex;align-items:center;gap:2px}
+.voice-waveform span{display:block;width:2px;background:rgba(255,255,255,.4);border-radius:1px}
+.voice-duration{flex-shrink:0;font-size:10px;color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums}
 
-.admin-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.admin-sub {
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.admin-sub span {
-  color: var(--accent);
-}
-
-.admin-inline-link {
-  background: transparent;
-  border: none;
-  color: var(--accent);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: none;
-}
-
-.admin-tabs {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.admin-tab {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 10px 24px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  border-radius: 40px;
-  transition: all 0.3s ease;
-  cursor: none;
-}
-
-.admin-tab.active {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(0, 210, 255, 0.08);
-  box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
-}
-
-.admin-toast {
-  display: none;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #00ff87;
-  background: rgba(0, 255, 135, 0.08);
-  border: 1px solid rgba(0, 255, 135, 0.25);
-  border-radius: 8px;
-  padding: 10px 18px;
-  margin-bottom: 20px;
-}
-
-.admin-toast.show {
-  display: block;
-}
-
-.admin-toast.error {
-  color: #ff5555;
-  background: rgba(255, 85, 85, 0.08);
-  border-color: rgba(255, 85, 85, 0.25);
-}
-
-.admin-panel {
-  display: none;
-  width: 100%;
-  max-width: 1200px;
-}
-
-.admin-panel.active {
-  display: block;
-}
-
-.panel-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.panel-count {
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.4);
-  text-transform: uppercase;
-}
-
-.panel-actions {
-  display: flex;
-  gap: 12px;
-}
-
-.admin-primary-btn {
-  border-color: rgba(0, 210, 255, 0.4) !important;
-  color: var(--accent) !important;
-}
-
-.admin-primary-btn:hover {
-  background: var(--accent) !important;
-  color: var(--black) !important;
-}
-
-/* ── Table ──────────────────────────────────────────────── */
-.admin-table-wrap {
-  width: 100%;
-  overflow-x: auto;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  background: rgba(0, 210, 255, 0.015);
-}
-
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 640px;
-}
-
-.admin-table th {
-  text-align: left;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-  text-transform: uppercase;
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  white-space: nowrap;
-}
-
-.admin-table td {
-  padding: 16px 20px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.75);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  vertical-align: middle;
-}
-
-.admin-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.admin-table tbody tr:hover {
-  background: rgba(0, 210, 255, 0.03);
-}
-
-.admin-table .empty-state {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.35);
-  letter-spacing: 0.1em;
-  font-size: 11px;
-  text-transform: uppercase;
-  padding: 40px 20px;
-}
-
-.load-more-btn {
-  display: block;
-  margin: 18px auto 0 auto;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.6);
-  padding: 10px 26px;
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  border-radius: 30px;
-  cursor: none;
-  transition: all 0.25s ease;
-}
-
-.load-more-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ── Live Chat panel ────────────────────────────────────── */
-.chat-admin-layout {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 20px;
-}
-
-.chat-admin-list {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  background: rgba(0, 210, 255, 0.015);
-  padding: 8px;
-  height: 560px;
-  overflow-y: auto;
-}
-
-.chat-thread-btn {
-  position: relative;
-  width: 100%;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  background: transparent;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 30px 12px 14px;
-  cursor: none;
-  transition: background 0.2s ease;
-}
-
-.chat-thread-btn:hover,
-.chat-thread-btn.active {
-  background: rgba(0, 210, 255, 0.06);
-}
-
-.chat-thread-name {
-  font-size: 12px;
-  color: var(--white);
-}
-
-.chat-thread-preview {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.4);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.chat-thread-dot {
-  position: absolute;
-  top: 14px;
-  right: 12px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.chat-admin-active {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  background: rgba(0, 210, 255, 0.015);
-  height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.chat-admin-thread {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.chat-admin-thread-head {
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--white);
-  text-transform: uppercase;
-}
-
-@media (max-width: 800px) {
-  .chat-admin-layout {
-    grid-template-columns: 1fr;
-  }
-  .chat-admin-list,
-  .chat-admin-active {
-    height: 360px;
-  }
-}
-
-.row-name {
-  color: var(--white);
-  font-weight: 600;
-}
-
-.row-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-}
-
-.row-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.6);
-  padding: 6px 14px;
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  border-radius: 20px;
-  cursor: none;
-  transition: all 0.25s ease;
-}
-
-.row-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.row-btn.danger:hover {
-  border-color: #ff5555;
-  color: #ff5555;
-}
-
-.row-btn:disabled {
-  opacity: 0.35;
-  pointer-events: none;
-}
-
-/* ── Status pills ───────────────────────────────────────── */
-.pill {
-  display: inline-block;
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  padding: 5px 12px;
-  border-radius: 20px;
-  text-transform: uppercase;
-}
-
-.pill.stock-in   { background: rgba(0, 255, 135, 0.1); color: #00ff87; border: 1px solid rgba(0, 255, 135, 0.25); }
-.pill.stock-low  { background: rgba(255, 200, 0, 0.1); color: #ffc800; border: 1px solid rgba(255, 200, 0, 0.25); }
-.pill.stock-out  { background: rgba(255, 85, 85, 0.1); color: #ff5555; border: 1px solid rgba(255, 85, 85, 0.25); }
-
-.pill.role-admin    { background: rgba(0, 210, 255, 0.1); color: var(--accent); border: 1px solid rgba(0, 210, 255, 0.25); }
-.pill.role-customer { background: rgba(255, 255, 255, 0.06); color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.15); }
-
-.status-select {
-  background: var(--offblk);
-  color: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  padding: 6px 12px;
-  cursor: none;
-}
-
-/* ── Modal ──────────────────────────────────────────────── */
-.admin-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(2, 6, 12, 0.75);
-  backdrop-filter: blur(6px);
-  z-index: 999999;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.admin-modal-overlay.open {
-  display: flex;
-}
-
-.admin-modal {
-  width: 100%;
-  max-width: 460px;
-  max-height: 90vh;
-  overflow-y: auto;
-  background: var(--offblk);
-  border: 1px solid rgba(0, 210, 255, 0.15);
-  border-radius: 20px;
-  box-shadow: 0 0 60px rgba(0, 210, 255, 0.1);
-  padding: 36px;
-}
-
-.admin-modal-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.admin-modal-head h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.05em;
-  color: var(--white);
-}
-
-.admin-modal-close {
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 26px;
-  line-height: 1;
-  cursor: none;
-}
-
-.admin-modal-close:hover {
-  color: var(--white);
-}
-
-#medicineForm {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.admin-field-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: end;
-}
-
-.admin-select-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.admin-select-group label {
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.4);
-  text-transform: uppercase;
-}
-
-.admin-select-group select {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--white);
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
-  padding: 8px 0;
-  cursor: none;
-}
-
-.admin-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  cursor: none;
-}
-
-.admin-checkbox input {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--accent);
-  cursor: none;
-}
-
-@media (max-width: 560px) {
-  .admin-field-row {
-    grid-template-columns: 1fr;
-  }
-  .admin-modal {
-    padding: 28px 22px;
-  }
-}
+/* ── Voice recording controls (admin reply form) ── */
+.voice-record-btn{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);cursor:none;display:flex;align-items:center;justify-content:center;transition:all .25s ease}
+.voice-record-btn:hover{border-color:var(--accent);color:var(--accent)}
+.voice-record-btn svg{width:16px;height:16px}
+.voice-record-btn.recording{background:#ff5555;border-color:#ff5555;color:var(--white);animation:pulse-rec-admin 1.3s ease-in-out infinite}
+@keyframes pulse-rec-admin{0%,100%{box-shadow:0 0 0 0 rgba(255,85,85,.5)}50%{box-shadow:0 0 0 8px rgba(255,85,85,0)}}
+.voice-recording-bar{display:none;flex:1;align-items:center;gap:10px;font-size:11px;letter-spacing:.08em;color:#ff5555;text-transform:uppercase}
+.voice-recording-bar.active{display:flex}
+.voice-recording-bar .rec-dot{width:8px;height:8px;border-radius:50%;background:#ff5555;animation:pulse-rec-admin 1.3s ease-in-out infinite}
+.voice-recording-bar .rec-cancel{margin-left:auto;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:10px;letter-spacing:.08em;cursor:none;text-transform:uppercase}
+.voice-recording-bar .rec-cancel:hover{color:#ff5555}

@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="../style/style.css" />
   <link rel="stylesheet" href="admin.css" />
   <link rel="stylesheet" href="../chat/chat-widget.css" />
@@ -54,22 +53,10 @@
           <button type="button" class="magnetic-btn admin-primary-btn" id="addMedicineBtn">+ ADD MEDICINE</button>
         </div>
       </div>
-
       <div class="admin-table-wrap">
         <table class="admin-table">
-          <thead>
-            <tr>
-              <th>NAME</th>
-              <th>CATEGORY</th>
-              <th>PRICE</th>
-              <th>STOCK</th>
-              <th>RX</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="inventoryBody">
-            <tr><td colspan="6" class="empty-state">LOADING INVENTORY…</td></tr>
-          </tbody>
+          <thead><tr><th>IMAGE</th><th>NAME</th><th>CATEGORY</th><th>PRICE</th><th>STOCK</th><th>RX</th><th></th></tr></thead>
+          <tbody id="inventoryBody"><tr><td colspan="7" class="empty-state">LOADING INVENTORY…</td></tr></tbody>
         </table>
       </div>
       <button type="button" class="load-more-btn" id="inventoryLoadMore" hidden>LOAD MORE</button>
@@ -77,23 +64,11 @@
 
     <!-- ORDERS -->
     <div class="admin-panel" id="panel-orders">
-      <div class="panel-toolbar">
-        <p class="panel-count" id="ordersCount">— ORDERS</p>
-      </div>
+      <div class="panel-toolbar"><p class="panel-count" id="ordersCount">— ORDERS</p></div>
       <div class="admin-table-wrap">
         <table class="admin-table">
-          <thead>
-            <tr>
-              <th>CUSTOMER</th>
-              <th>ITEMS</th>
-              <th>TOTAL</th>
-              <th>STATUS</th>
-              <th>PLACED</th>
-            </tr>
-          </thead>
-          <tbody id="ordersBody">
-            <tr><td colspan="5" class="empty-state">NO ORDERS YET — THE CHECKOUT MODULE IS NEXT UP.</td></tr>
-          </tbody>
+          <thead><tr><th>CUSTOMER</th><th>ITEMS</th><th>TOTAL</th><th>STATUS</th><th>PLACED</th></tr></thead>
+          <tbody id="ordersBody"><tr><td colspan="5" class="empty-state">NO ORDERS YET.</td></tr></tbody>
         </table>
       </div>
       <button type="button" class="load-more-btn" id="ordersLoadMore" hidden>LOAD MORE</button>
@@ -101,23 +76,11 @@
 
     <!-- USERS -->
     <div class="admin-panel" id="panel-users">
-      <div class="panel-toolbar">
-        <p class="panel-count" id="usersCount">— ACCOUNTS</p>
-      </div>
+      <div class="panel-toolbar"><p class="panel-count" id="usersCount">— ACCOUNTS</p></div>
       <div class="admin-table-wrap">
         <table class="admin-table">
-          <thead>
-            <tr>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>ROLE</th>
-              <th>JOINED</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="usersBody">
-            <tr><td colspan="5" class="empty-state">LOADING ACCOUNTS…</td></tr>
-          </tbody>
+          <thead><tr><th>NAME</th><th>EMAIL</th><th>ROLE</th><th>JOINED</th><th></th></tr></thead>
+          <tbody id="usersBody"><tr><td colspan="5" class="empty-state">LOADING ACCOUNTS…</td></tr></tbody>
         </table>
       </div>
       <button type="button" class="load-more-btn" id="usersLoadMore" hidden>LOAD MORE</button>
@@ -130,17 +93,25 @@
           <div id="chatList"></div>
           <button type="button" class="load-more-btn" id="chatListLoadMore" hidden>LOAD MORE CONVERSATIONS</button>
         </div>
-
         <div class="chat-admin-active">
           <p class="empty-state" id="chatEmptyState">SELECT A CONVERSATION TO VIEW IT.</p>
-
           <div class="chat-admin-thread" id="chatActiveView" hidden>
             <div class="chat-admin-thread-head" id="chatActiveName">—</div>
             <button type="button" class="chat-load-more" id="chatMsgLoadMore" hidden>LOAD EARLIER MESSAGES</button>
             <div class="chat-messages" id="chatMessagesAdmin"></div>
+
             <form class="chat-input-row" id="chatReplyForm">
               <input type="text" id="chatReplyInput" placeholder="TYPE A REPLY…" autocomplete="off" />
-              <button type="submit" aria-label="Send">SEND</button>
+
+              <div class="voice-recording-bar" id="voiceRecordingBarAdmin">
+                <span class="rec-dot"></span>
+                <span id="voiceTimerAdmin">0:00</span>
+                <span>RECORDING…</span>
+                <button type="button" class="rec-cancel" id="voiceCancelBtnAdmin">CANCEL</button>
+              </div>
+
+              <button type="button" class="voice-record-btn" id="voiceRecordBtnAdmin" aria-label="Record voice reply"></button>
+              <button type="submit">SEND</button>
             </form>
           </div>
         </div>
@@ -148,22 +119,19 @@
     </div>
   </section>
 
-  <!-- Add / Edit Medicine Modal -->
+  <!-- ── Add / Edit Medicine Modal ── -->
   <div class="admin-modal-overlay" id="medicineModalOverlay">
     <div class="admin-modal">
       <div class="admin-modal-head">
         <h3 id="medicineModalTitle">ADD MEDICINE</h3>
         <button type="button" class="admin-modal-close" id="closeMedicineModal">&times;</button>
       </div>
-
       <form id="medicineForm">
         <input type="hidden" id="medicineId" />
-
         <div class="input-group">
           <input type="text" id="medName" required />
           <label for="medName">NAME</label>
         </div>
-
         <div class="admin-field-row">
           <div class="admin-select-group">
             <label for="medCategory">CATEGORY</label>
@@ -182,54 +150,42 @@
             </select>
           </div>
         </div>
-
         <div class="input-group">
           <textarea id="medDescription" rows="3" required></textarea>
           <label for="medDescription">DESCRIPTION</label>
         </div>
-
         <div class="admin-field-row">
           <div class="input-group">
             <input type="number" id="medPrice" step="0.01" min="0" required />
             <label for="medPrice">PRICE (USD)</label>
           </div>
-          <label class="admin-checkbox">
-            <input type="checkbox" id="medRx" />
-            REQUIRES PRESCRIPTION
+          <label class="admin-checkbox"><input type="checkbox" id="medRx" /> REQUIRES PRESCRIPTION</label>
+        </div>
+        <div class="admin-image-field">
+          <span class="admin-image-field-label">PRODUCT IMAGE (OPTIONAL)</span>
+          <label class="admin-upload-area" for="medImageFile" id="imageUploadArea">
+            <input type="file" id="medImageFile" accept="image/png,image/jpeg,image/webp,image/gif" />
+            <span class="upload-placeholder" id="uploadPlaceholder">↑ CLICK TO UPLOAD IMAGE</span>
+            <img id="medImagePreview" class="upload-preview" src="" alt="Preview" hidden />
           </label>
+          <input type="hidden" id="medImageUrl" />
         </div>
-
-        <div class="input-group">
-          <input type="text" id="medImage" />
-          <label for="medImage">IMAGE PATH (OPTIONAL)</label>
-        </div>
-
         <button type="submit" class="magnetic-btn submit-btn admin-primary-btn" id="medicineSubmitBtn">SAVE MEDICINE</button>
       </form>
     </div>
   </div>
 
-  <!-- Change Password Modal -->
+  <!-- ── Change Password Modal ── -->
   <div class="admin-modal-overlay" id="passwordModalOverlay">
     <div class="admin-modal">
       <div class="admin-modal-head">
         <h3>CHANGE PASSWORD</h3>
         <button type="button" class="admin-modal-close" id="closePasswordModal">&times;</button>
       </div>
-
       <form id="passwordForm">
-        <div class="input-group">
-          <input type="password" id="pwCurrent" required />
-          <label for="pwCurrent">CURRENT PASSWORD</label>
-        </div>
-        <div class="input-group">
-          <input type="password" id="pwNew" required minlength="6" />
-          <label for="pwNew">NEW PASSWORD (MIN 6 CHARACTERS)</label>
-        </div>
-        <div class="input-group">
-          <input type="password" id="pwConfirm" required minlength="6" />
-          <label for="pwConfirm">CONFIRM NEW PASSWORD</label>
-        </div>
+        <div class="input-group"><input type="password" id="pwCurrent" required /><label for="pwCurrent">CURRENT PASSWORD</label></div>
+        <div class="input-group"><input type="password" id="pwNew" required minlength="6" /><label for="pwNew">NEW PASSWORD (MIN 6 CHARACTERS)</label></div>
+        <div class="input-group"><input type="password" id="pwConfirm" required minlength="6" /><label for="pwConfirm">CONFIRM NEW PASSWORD</label></div>
         <button type="submit" class="magnetic-btn submit-btn admin-primary-btn" id="passwordSubmitBtn">UPDATE PASSWORD</button>
       </form>
     </div>

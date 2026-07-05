@@ -1,198 +1,42 @@
-/* pharmacy/pharmacy.css - Local Module Styles */
+/* pharmacy/pharmacy.css */
 
-.catalogue-section {
-  width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(to bottom, var(--offblk), var(--main), var(--offblk));
-  padding: 120px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-}
+.catalogue-section{width:100%;min-height:100vh;background:linear-gradient(to bottom,var(--offblk),var(--main),var(--offblk));padding:120px 20px;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.catalogue-header{text-align:center;margin-bottom:50px;width:100%;max-width:1200px}
+.filter-controls{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:30px}
+.filter-btn{background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:10px 24px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.15em;border-radius:40px;transition:all .3s ease;cursor:none}
+.filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,210,255,.08);box-shadow:0 0 15px rgba(0,210,255,.2)}
+.medicine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;width:100%;max-width:1200px;perspective:1000px}
+.empty-state{grid-column:1/-1;text-align:center;color:rgba(255,255,255,.35);letter-spacing:.15em;font-size:12px;text-transform:uppercase;padding:60px 20px}
 
-.catalogue-header {
-  text-align: center;
-  margin-bottom: 50px;
-  width: 100%;
-  max-width: 1200px;
-}
+.med-card{position:relative;background:var(--offblk);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px 15px;display:flex;flex-direction:column;gap:12px;transition:border-color .3s ease,background .3s ease,transform .3s ease}
+.med-card:hover{border-color:rgba(0,210,255,.4);background:rgba(0,210,255,.02);transform:scale(1.03)}
+.med-header{display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}
+.med-icon{width:32px;height:32px;color:var(--accent)}
+.med-icon svg{width:100%;height:100%}
+.med-image-container{width:100%;height:120px;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:8px;background:rgba(255,255,255,.01);border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.med-product-image{max-width:80%;max-height:80%;object-fit:contain;filter:drop-shadow(0 10px 15px rgba(0,210,255,.15));transition:transform .5s var(--ease-out-expo)}
+.med-card:hover .med-product-image{transform:scale(1.1)}
+.med-price{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--white);letter-spacing:1px}
+.med-info h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--white);letter-spacing:1px;margin-bottom:5px}
+.med-category{font-size:9px;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;display:block}
+.med-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.6;font-weight:300}
+.med-badges{display:flex;gap:10px;margin-top:auto}
+.badge{font-size:8px;padding:5px 10px;border-radius:4px;letter-spacing:.12em;font-weight:700}
+.badge.prescription{background:rgba(255,85,85,.1);color:#ff5555;border:1px solid rgba(255,85,85,.25)}
+.badge.otc{background:rgba(0,255,135,.1);color:#00ff87;border:1px solid rgba(0,255,135,.25)}
 
-.filter-controls {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 30px;
-}
+/* ── Two-button action row ── */
+.med-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.med-btn-buy,.med-btn-cart{padding:11px 6px;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.14em;border-radius:24px;cursor:none;transition:all .3s ease;white-space:nowrap}
+.med-btn-buy{background:var(--accent);color:var(--black);border:1px solid var(--accent);font-weight:700}
+.med-btn-buy:hover{background:transparent;color:var(--accent);box-shadow:0 0 15px rgba(0,210,255,.3)}
+.med-btn-cart{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.2)}
+.med-btn-cart:hover{border-color:var(--accent);color:var(--accent)}
+.med-btn-buy:disabled,.med-btn-cart:disabled{opacity:.45;pointer-events:none}
 
-.filter-btn {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 10px 24px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  border-radius: 40px;
-  transition: all 0.3s ease;
-  cursor: none;
-}
+/* ── Inline buy feedback ── */
+.med-buy-feedback{font-size:9px;letter-spacing:.09em;text-align:center;padding:8px 10px;color:#00ff87;background:rgba(0,255,135,.08);border:1px solid rgba(0,255,135,.25);border-radius:8px;text-transform:uppercase;line-height:1.5}
 
-.filter-btn.active, .filter-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(0, 210, 255, 0.08);
-  box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
-}
-
-.medicine-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  width: 100%;
-  max-width: 1200px;
-  perspective: 1000px;
-}
-
-.med-card {
-  position: relative;
-  background: var(--offblk);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 20px 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
-}
-
-.med-card:hover {
-  border-color: rgba(0, 210, 255, 0.4);
-  background: rgba(0, 210, 255, 0.02);
-  transform: scale(1.03);
-}
-
-.med-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  pointer-events: none;
-}
-
-.med-icon {
-  width: 32px;
-  height: 32px;
-  color: var(--accent);
-}
-
-.med-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.med-image-container {
-  width: 100%;
-  height: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  pointer-events: none;
-}
-
-.med-product-image {
-  max-width: 80%;
-  max-height: 80%;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 15px rgba(0, 210, 255, 0.15));
-  transition: transform 0.5s var(--ease-out-expo);
-  transform: translateZ(20px);
-}
-
-.med-card:hover .med-product-image {
-  transform: scale(1.1) translateZ(30px);
-}
-
-.med-price {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 26px;
-  color: var(--white);
-  letter-spacing: 1px;
-}
-
-.med-info h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  color: var(--white);
-  letter-spacing: 1px;
-  margin-bottom: 5px;
-}
-
-.med-category {
-  font-size: 9px;
-  color: var(--accent);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  display: block;
-}
-
-.med-desc {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.6;
-  font-weight: 300;
-}
-
-.med-badges {
-  display: flex;
-  gap: 10px;
-  margin-top: auto;
-}
-
-.badge {
-  font-size: 8px;
-  padding: 5px 10px;
-  border-radius: 4px;
-  letter-spacing: 0.12em;
-  font-weight: 700;
-}
-
-.badge.prescription {
-  background: rgba(255, 85, 85, 0.1);
-  color: #ff5555;
-  border: 1px solid rgba(255, 85, 85, 0.25);
-}
-
-.badge.otc {
-  background: rgba(0, 255, 135, 0.1);
-  color: #00ff87;
-  border: 1px solid rgba(0, 255, 135, 0.25);
-}
-
-.add-to-cart-btn {
-  width: 100%;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--white);
-  padding: 14px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  border-radius: 30px;
-  margin-top: 10px;
-  transition: all 0.3s ease;
-  cursor: none;
-}
-
-.add-to-cart-btn:hover {
-  background: var(--accent);
-  color: var(--black);
-  border-color: var(--accent);
-  box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
-}
+/* ── Load More ── */
+.load-more-btn{display:block;margin:40px auto 0;background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:12px 30px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.15em;border-radius:30px;cursor:none;transition:all .25s ease}
+.load-more-btn:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 15px rgba(0,210,255,.15)}
