@@ -100,9 +100,7 @@
   display: block;
 }
 
-/* ── Password eye toggle ─────────────────────────────────────────────── */
-
-/* Hides whichever icon is inactive — !important beats any flex/svg reset */
+/* ── Eye toggle ─────────────────────────────────────────────────────── */
 .eye-hidden {
   display: none !important;
 }
@@ -133,9 +131,127 @@
   display: block;
 }
 
-/* Stop typed text from sliding under the icon */
 .input-group:has(.pw-toggle) input {
   padding-right: 28px;
+}
+
+/* ── Forgot password link ───────────────────────────────────────────── */
+.forgot-link {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: right;
+  cursor: none;
+  padding: 0;
+  margin-top: -20px;
+  align-self: flex-end;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.forgot-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── Forgot password inline panel ──────────────────────────────────── */
+.forgot-panel {
+  text-align: left;
+  animation: fadeSlideIn 0.25s ease;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.forgot-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.forgot-hint {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.forgot-success {
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: #00ff87;
+  background: rgba(0, 255, 135, 0.08);
+  border: 1px solid rgba(0, 255, 135, 0.25);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.forgot-error {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: #ff5555;
+  background: rgba(255, 85, 85, 0.08);
+  border: 1px solid rgba(255, 85, 85, 0.25);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+#forgotForm {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.forgot-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.forgot-back-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: none;
+  padding: 0;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.forgot-back-btn:hover {
+  color: var(--white);
+}
+
+.forgot-submit-btn {
+  padding: 12px 24px;
+}
+
+.forgot-submit-btn.loading {
+  opacity: 0.55;
+  pointer-events: none;
 }
 
 @media (max-width: 480px) {

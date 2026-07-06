@@ -40,7 +40,7 @@
 
       <p class="auth-error" id="authError"></p>
 
-      <!-- Sign In -->
+      <!-- ── Sign In ── -->
       <form class="auth-form active" id="signinForm" novalidate>
         <div class="input-group">
           <input type="email" id="signinEmail" required />
@@ -54,12 +54,38 @@
             <svg class="eye-icon eye-closed eye-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
           </button>
         </div>
+
+        <!-- Forgot password link -->
+        <button type="button" class="forgot-link" id="forgotPasswordBtn">FORGOT PASSWORD?</button>
+
         <button type="submit" class="magnetic-btn submit-btn auth-submit">
           <span class="btn-label">SIGN IN</span>
         </button>
       </form>
 
-      <!-- Sign Up -->
+      <!-- ── Forgot Password inline panel ── -->
+      <div class="forgot-panel" id="forgotPanel" hidden>
+        <h3 class="forgot-title">RESET PASSWORD</h3>
+        <p class="forgot-hint">ENTER YOUR EMAIL AND WE'LL SEND YOU A RESET LINK.</p>
+
+        <p class="forgot-success" id="forgotSuccess" hidden>
+          ✓ CHECK YOUR INBOX FOR THE RESET LINK. CHECK SPAM IF YOU DON'T SEE IT.
+        </p>
+        <p class="forgot-error" id="forgotError" hidden></p>
+
+        <form id="forgotForm" novalidate>
+          <div class="input-group">
+            <input type="email" id="forgotEmail" required />
+            <label for="forgotEmail">YOUR EMAIL</label>
+          </div>
+          <div class="forgot-actions">
+            <button type="button" class="forgot-back-btn" id="forgotBackBtn">← BACK TO SIGN IN</button>
+            <button type="submit" class="magnetic-btn forgot-submit-btn" id="forgotSubmitBtn">SEND LINK</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ── Sign Up ── -->
       <form class="auth-form" id="signupForm" novalidate>
         <div class="input-group">
           <input type="text" id="signupName" required />
@@ -89,6 +115,7 @@
           <span class="btn-label">CREATE ACCOUNT</span>
         </button>
       </form>
+
     </div>
   </section>
 
