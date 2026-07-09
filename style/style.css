@@ -669,6 +669,18 @@ section .container{
   justify-content: center;
 }
 
+.ourteam-section {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to top, var(--offblk), var(--main));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
 /* ── EKG Heartbeat Button ────────────────────────────────── */
 .heartbeat-btn {
   position: relative;

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/responsive.css" />
 </head>
 <body>
   <div class="custom-cursor" id="customCursor"></div>
@@ -38,6 +39,7 @@
         <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="pharmacy/pharmacy.html" class="nav-link">Pharmacy</a></li>
         <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="#ourteam" class="nav-link">Our Team</a></li>
         <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
         <li class="nav-item">
           <a href="auth/auth.html" class="nav-link" id="navAuthLink">Sign In</a>
@@ -151,6 +153,14 @@
     </div>
   </section>
 
+  <section id="ourteam" class="ourteam-section">
+    <div class="ourteam-container reveal">
+      <h2 class="section-title">OUR TEAM</h2>
+      <div class="title-line"></div>
+      <p>meet the dedicated professionals behind our commitment to excellence.</p>
+    </div>
+  </section>
+
   <section id="contact" class="contact-section">
     <div class="contact-container reveal">
       <h2 class="section-title">REACH OUT</h2>
@@ -227,5 +237,6 @@
     import { initNavAuth } from "./firebase/nav-auth.js";
     initNavAuth("");
   </script>
+  <script src="script/navbar.js"></script>
 </body>
 </html>

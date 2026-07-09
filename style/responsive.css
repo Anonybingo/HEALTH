@@ -1,0 +1,377 @@
+/* style/responsive.css
+   ─────────────────────────────────────────────────────────────────────
+   Responsive layer for HEALTH CENTER — loaded after style.css and every
+   page's local CSS. Covers all pages at three breakpoints:
+     1024px  tablet landscape
+      768px  tablet portrait  ← main break (hamburger, stack grids)
+      480px  mobile           ← fine-tune spacing and sizes
+   ─────────────────────────────────────────────────────────────────────*/
+
+/* ── 1. Hide custom cursor on touch devices ───────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  html, body, a, button, .service-item,
+  .med-card, .filter-btn, .add-to-cart-btn,
+  .auth-tab, .magnetic-btn, .nav-link, .nav-toggle,
+  .row-btn, .admin-tab, .load-more-btn,
+  .pw-toggle, .voice-record-btn, .voice-play-btn,
+  .chat-thread-btn, .forgot-link, .forgot-back-btn {
+    cursor: auto !important;
+  }
+  .custom-cursor { display: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   2. NAVBAR  (hamburger menu ≤ 768px)
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Hamburger button — hidden on desktop */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: none;
+  z-index: 10;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+/* Animated X when open */
+.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+
+  .navbar-container {
+    position: relative;
+    padding: 14px 20px;
+  }
+
+  /* Collapse the nav-menu */
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: rgba(10, 19, 34, 0.97);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 12px 8px;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 99998;
+    animation: menuDrop 0.2s ease;
+  }
+  @keyframes menuDrop {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .nav-menu.open { display: flex; }
+
+  .nav-item { width: 100%; }
+  .nav-item > a.nav-link {
+    display: block;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+  .nav-item > a.nav-link:hover,
+  .nav-item > a.nav-link:focus {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Auth dropdown inside the mobile menu */
+  .auth-dropdown {
+    position: static !important;
+    display: none;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    margin-top: 4px;
+    padding: 4px 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  /* Show when JS sets display:block */
+  .auth-dropdown[style*="block"] { display: block !important; }
+  .auth-dropdown li a,
+  .auth-dropdown li button {
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+
+  /* Disable magnetic effect on mobile (prevents layout jumps) */
+  .nav-link, .navbar-logo, .magnetic-btn {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   3. HOMEPAGE  (index.html)
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Portal section */
+@media (max-width: 768px) {
+  .portal-section { padding: 80px 16px; }
+  .portal-content { padding: 32px 22px; }
+  .portal-content p { font-size: 11px; }
+}
+
+/* About section */
+@media (max-width: 768px) {
+  .about-section { padding: 80px 16px; }
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  .title-line { margin: 0 auto 24px; }
+  .about-visual { height: 260px; }
+  .neural-cell { width: 220px; height: 220px; }
+}
+
+/* Contact section */
+@media (max-width: 768px) {
+  .contact-section { padding: 80px 16px; }
+  .contact-container { max-width: 100%; }
+}
+
+/* Footer */
+@media (max-width: 768px) {
+  .footer-section { padding: 60px 16px 40px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+}
+
+/* Team modal */
+@media (max-width: 768px) {
+  .team-overlay { padding: 20px 12px; }
+  .team-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .portal-content { padding: 24px 16px; }
+  .section-title { font-size: clamp(34px, 10vw, 60px); }
+  .welcome-text { font-size: clamp(60px, 18vw, 120px); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   4. PHARMACY  (pharmacy/pharmacy.html)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .catalogue-section { padding: 100px 14px 60px; }
+
+  .medicine-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .filter-controls { gap: 8px; }
+  .filter-btn { padding: 8px 16px; font-size: 9px; }
+}
+
+@media (max-width: 480px) {
+  .medicine-grid { grid-template-columns: 1fr; }
+
+  .med-actions { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .med-btn-buy, .med-btn-cart { padding: 10px 4px; font-size: 8px; letter-spacing: 0.08em; }
+
+  .catalogue-header { margin-bottom: 32px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   5. AUTH  (auth/auth.html)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .auth-section { padding: 120px 14px 60px; }
+  .auth-card { padding: 36px 18px; }
+  .auth-tabs { gap: 8px; }
+  .auth-tab { padding: 9px 16px; font-size: 9px; }
+  .auth-form { gap: 28px; }
+  .forgot-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+  .forgot-back-btn { text-align: center; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   6. ADMIN  (admin/admin.html)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .admin-section { padding: 120px 16px 80px; }
+}
+
+@media (max-width: 768px) {
+  .admin-tabs { gap: 8px; }
+  .admin-tab { padding: 8px 16px; font-size: 9px; letter-spacing: 0.1em; }
+
+  .panel-toolbar { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .panel-actions { width: 100%; justify-content: flex-end; }
+
+  /* Table stays horizontally scrollable — no change needed to the wrapper */
+  .admin-table th,
+  .admin-table td { padding: 12px 14px; font-size: 11px; }
+
+  /* Chat panel stacks vertically (already has @media 800px in admin.css,
+     this fine-tunes inner sizing) */
+  .chat-admin-list { height: 260px; }
+  .chat-admin-active { height: 340px; }
+}
+
+@media (max-width: 480px) {
+  .admin-section { padding: 120px 12px 60px; }
+  .admin-tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .admin-tab { flex-shrink: 0; }
+
+  .panel-actions { flex-direction: column; width: 100%; }
+  .panel-actions .magnetic-btn { width: 100%; text-align: center; }
+
+  .row-actions { flex-direction: column; gap: 6px; }
+  .row-btn { text-align: center; }
+
+  /* Modal full-width on small screens */
+  .admin-modal { padding: 24px 16px; max-height: 95vh; }
+  .admin-field-row { grid-template-columns: 1fr; }
+
+  /* Chat */
+  .chat-input-row { gap: 6px; padding: 10px; }
+  .chat-input-row input { font-size: 11px; padding: 8px 12px; }
+  .voice-record-btn { width: 34px; height: 34px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   7. CART  (cart/cart.html)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .cart-section { padding: 120px 16px 80px; }
+  .cart-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .cart-summary { position: static; }
+}
+
+@media (max-width: 480px) {
+  .cart-section { padding: 110px 12px 60px; }
+  .cart-item {
+    grid-template-columns: 56px 1fr;
+    grid-template-areas:
+      "image info"
+      "image qty"
+      "remove remove";
+    row-gap: 8px;
+  }
+  .cart-item-image { grid-area: image; }
+  .cart-item-info  { grid-area: info; }
+  .cart-qty        { grid-area: qty; }
+  .cart-item-remove{ grid-area: remove; justify-self: start; }
+  .cart-item-info h4 { font-size: 14px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   8. ORDER HISTORY  (history/history.html)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .history-section { padding: 120px 16px 80px; }
+  .history-table-wrap { border-radius: 10px; }
+  .history-table th,
+  .history-table td { padding: 12px 14px; font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+  .history-section { padding: 110px 12px 60px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   9. PROFILE  (profile/profile.html)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .profile-section { padding: 120px 14px 60px; }
+  .profile-card { padding: 36px 18px; }
+  #profileForm { gap: 28px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   10. SETTINGS  (settings/settings.html)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .settings-section { padding: 120px 14px 60px; }
+  .settings-card { padding: 36px 18px; }
+  #passwordForm { gap: 28px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   11. LIVE CHAT  (chat/chat.html)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .chatpage-section { padding: 120px 16px 60px; }
+  .chatpage-window { height: 65vh; }
+}
+
+@media (max-width: 480px) {
+  .chatpage-section { padding: 110px 12px 50px; }
+  .chatpage-window { height: 68vh; border-radius: 14px; }
+  .chatpage-input-row { gap: 6px; padding: 10px; }
+  .chatpage-input-row input { font-size: 11px; padding: 8px 12px; }
+  .chatpage-input-row .magnetic-btn { padding: 9px 14px; font-size: 9px; }
+  .voice-recording-bar { font-size: 10px; gap: 6px; }
+  .chat-bubble-msg { font-size: 12px; padding: 10px 12px; }
+  .voice-bubble { max-width: 200px; padding: 8px 10px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   12. SETUP  (setup/setup.html)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .setup-section { padding: 120px 14px 60px; }
+  .setup-card { padding: 36px 18px; }
+  .setup-info-box { padding: 16px; }
+  .setup-info-row { flex-direction: column; gap: 4px; align-items: flex-start; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   13. VOICE MESSAGE WIDGET (chat-widget.css supplement)
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .chat-bubble   { bottom: 14px; right: 14px; width: 50px; height: 50px; }
+  .chat-panel    { bottom: 76px; right: 14px; left: 14px; width: auto; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   14. MISC GLOBAL FIXES
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Prevent horizontal scroll on all pages */
+body { overflow-x: hidden; }
+
+/* Make all modals full-width on small screens */
+@media (max-width: 480px) {
+  .admin-modal-overlay { padding: 12px; }
+  .admin-modal { max-width: 100%; }
+}
+
+/* Magnetic-btn full width inside stacked layouts on mobile */
+@media (max-width: 480px) {
+  .cart-checkout-btn,
+  .forgot-submit-btn,
+  .setup-claim-btn { width: 100%; }
+}
+
+/* Reduce section title size globally on small screens */
+@media (max-width: 480px) {
+  .section-title { font-size: clamp(32px, 9vw, 54px); }
+}
