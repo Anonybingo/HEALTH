@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team | HEALTH CENTER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style/style.css" />
+  <link rel="stylesheet" href="../style/responsive.css" />
+  <link rel="stylesheet" href="team.css" />
+</head>
+<body>
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="../index.html"><div class="navbar-logo">HEALTH CENTER</div></a>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link">HOME</a></li>
+        <li class="nav-item"><a href="../pharmacy/pharmacy.html" class="nav-link">PHARMACY</a></li>
+        <li class="nav-item"><a href="team.html" class="nav-link">TEAM</a></li>
+        <li class="nav-item"><a href="../index.html#contact" class="nav-link">CONTACT</a></li>
+        <li class="nav-item">
+          <a href="../auth/auth.html" class="nav-link" id="navAuthLink">SIGN IN</a>
+          <ul class="auth-dropdown" id="authDropdown" style="display:none;">
+            <li><a href="../profile/profile.html">Profile</a></li>
+            <li><a href="../cart/cart.html">Cart</a></li>
+            <li><a href="../history/history.html">Order History</a></li>
+            <li><a href="../chat/chat.html">Live Chat</a></li>
+            <li><a href="../settings/settings.html">Settings</a></li>
+            <li><button data-logout class="logout-btn">Logout</button></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="team-hero">
+    <div class="team-hero-content reveal active">
+      <p class="team-hero-label">THE PEOPLE BEHIND THE CARE</p>
+      <h1 class="section-title">OUR TEAM</h1>
+      <div class="title-line" style="margin: 0 auto;"></div>
+      <p class="team-hero-sub">
+        DEDICATED SPECIALISTS COMMITTED TO YOUR HEALTH AND LONGEVITY.
+        EACH MEMBER BRINGS YEARS OF EXPERTISE AND GENUINE CARE.
+      </p>
+    </div>
+  </section>
+
+  <!-- Team Grid
+       ─────────────────────────────────────────────────────────────
+       TO ADD A NEW MEMBER: copy one .member-card block below,
+       paste it inside .team-grid, and change the content.
+       No extra CSS needed — the card styles itself automatically.
+       ──────────────────────────────────────────────────────────── -->
+  <section class="team-section">
+    <div class="team-grid">
+
+      <!-- ── MEMBER 1 ── -->
+      <div class="member-card">
+        <div class="member-photo">
+          <!-- Replace src with the member's photo path.
+               If you leave it blank or the image fails to load,
+               a placeholder silhouette shows automatically. -->
+          <img src="../media/image1.png" alt="Dr. Alex Rivers" onerror="this.style.display='none'" />
+        </div>
+        <div class="member-body">
+          <span class="member-role">CHIEF SURGEON</span>
+          <h3 class="member-name">DR. ALEX RIVERS</h3>
+          <span class="member-spec">NEUROLOGY</span>
+          <p class="member-bio">
+            Specializing in advanced synaptic repair and neural mapping.
+            15 years of precision medicine at the forefront of neurological science.
+          </p>
+          <div class="member-footer">
+            <span class="member-exp">15 YRS EXP.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MEMBER 2 ── -->
+      <div class="member-card">
+        <div class="member-photo">
+          <img src="../media/image2.png" alt="Sarah Vance" onerror="this.style.display='none'" />
+        </div>
+        <div class="member-body">
+          <span class="member-role">PHARMACIST</span>
+          <h3 class="member-name">SARAH VANCE</h3>
+          <span class="member-spec">CLINICAL PHARMACOLOGY</span>
+          <p class="member-bio">
+            Expert in bio-synthetic compounding and longevity supplements.
+            Bridging the gap between cutting-edge research and patient care.
+          </p>
+          <div class="member-footer">
+            <span class="member-exp">8 YRS EXP.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ADD MORE MEMBERS BELOW — just copy the block above ── -->
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <canvas id="leafCanvas" class="leaf-canvas"></canvas>
+    <div class="footer-container reveal">
+      <div class="footer-grid">
+        <div class="footer-col branding">
+          <div class="navbar-logo">HEALTH CENTER</div>
+          <p class="footer-desc">ELEVATING LONGEVITY AND PEAK PERFORMANCE THROUGH ADVANCED MEDICAL SCIENCE AND KINETIC THERAPIES.</p>
+        </div>
+        <div class="footer-col links">
+          <h4>NAVIGATION</h4>
+          <ul>
+            <li><a href="../index.html" class="nav-link">HOME</a></li>
+            <li><a href="../pharmacy/pharmacy.html" class="nav-link">PHARMACY</a></li>
+            <li><a href="team.html" class="nav-link">TEAM</a></li>
+            <li><a href="../index.html#contact" class="nav-link">CONTACT</a></li>
+          </ul>
+        </div>
+        <div class="footer-col contact-info">
+          <h4>CONNECT</h4>
+          <p>TRANSMISSION: INFO@HEALTHCENTER.COM</p>
+          <p>CORE SYSTEM: +250 790 778 146</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HEALTH CENTER. ALL RIGHTS RESERVED.</p>
+        <div class="bottom-badge">
+          <div class="badge-dot"></div>
+          <span>MSPlanning</span>
+          <div class="badge-dot"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script/cursor.js"></script>
+  <script src="../script/navbar.js"></script>
+  <script type="module" src="team.js"></script>
+  <script type="module">
+    import { initNavAuth } from "../firebase/nav-auth.js";
+    initNavAuth("../");
+  </script>
+</body>
+</html>
